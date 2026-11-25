@@ -1,4 +1,4 @@
-﻿# Secretos / entorno
+# Secretos / entorno
 .env
 .env.*
 !.env.example
@@ -20,8 +20,7 @@ __pycache__/
 htmlcov/
 
 # Datos generados / descargados (se replican con el README)
-data/raw/
-data/cache/
+data/
 
 # IDE / SO
 .vscode/

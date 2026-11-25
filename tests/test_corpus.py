@@ -29,7 +29,7 @@ class FakeIndex:
 
 @pytest.fixture
 def settings(tmp_path):
-    return Settings(namespace="ns", corpus_cache=tmp_path / "cache" / "corpus.jsonl")
+    return Settings(namespace="ns", cache_dir=tmp_path / "cache")
 
 
 def _write_cache(settings, n):

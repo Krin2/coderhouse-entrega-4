@@ -1,4 +1,4 @@
-﻿import dataclasses
+import dataclasses
 
 import pytest
 
@@ -37,9 +37,18 @@ def test_require_keys(monkeypatch):
     Settings(pinecone_api_key="a", openai_api_key="b").require_keys()
 
 
+def test_cache_por_namespace():
+    assert Settings(namespace="a").corpus_cache != Settings(namespace="b").corpus_cache
+    assert Settings(namespace="a").corpus_cache.name == "a.jsonl"
+
+
 def test_cli_parsea_comandos():
     p = build_parser()
     assert p.parse_args(["query", "hola", "--category", "advanced", "-k", "3"]).category == "advanced"
     assert p.parse_args(["evaluate"]).k == 5
     with pytest.raises(SystemExit):
         p.parse_args([])
+    ing = p.parse_args(["ingest", "--with-code", "--namespace", "x"])
+    assert ing.with_code and ing.namespace == "x" and not p.parse_args(["ingest"]).with_code
+    cmp = p.parse_args(["compare-reports", "a.json", "b.json", "--out", "o.md"])
+    assert (cmp.base, cmp.other, cmp.out) == ("a.json", "b.json", "o.md")

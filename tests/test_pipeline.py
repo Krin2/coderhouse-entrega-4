@@ -22,7 +22,7 @@ class FakeIndex:
 
 
 def _pipeline(tmp_path, docs, index=None):
-    settings = Settings(namespace="ns", corpus_cache=tmp_path / "corpus.jsonl")
+    settings = Settings(namespace="ns", cache_dir=tmp_path)
     return IngestPipeline(settings, FakeLoader(docs), FakeStore(), index or FakeIndex()), settings
 
 
