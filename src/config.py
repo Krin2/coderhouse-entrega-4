@@ -1,5 +1,7 @@
 ﻿"""Configuración central: carga .env y expone constantes validadas."""
 import os
+from pathlib import Path
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -16,6 +18,8 @@ REGION = os.getenv("PINECONE_REGION", "us-east-1")
 CHUNK_SIZE = 600      # tokens
 CHUNK_OVERLAP = 80    # tokens
 TOP_K = 5
+
+CORPUS_CACHE = Path("data/cache/corpus.jsonl")   # corpus BM25 (se invalida solo)
 
 
 def require_keys() -> None:

@@ -7,8 +7,8 @@ Módulo de recuperación híbrido (BM25 + vectorial) sobre Pinecone Serverless, 
 - **Embeddings:** OpenAI `text-embedding-3-small` (1536 dim, cosine).
 - **Índice:** Pinecone Serverless (AWS `us-east-1`), namespace `docs-fastapi`.
 - **Chunking:** `RecursiveCharacterTextSplitter` por tokens (600 tokens, overlap 80).
-- **Metadata por chunk:** `text` (contenido original), `source`, `page` (índice del chunk en el documento), `category`, `doc_id`, `chunk_id`.
-- **Híbrido:** `EnsembleRetriever` (BM25 0.5 + Pinecone 0.5). El corpus BM25 se reconstruye desde la metadata de Pinecone (cache en `data/cache/`), sin otra base de datos.
+- **Metadata por chunk:** `text` (contenido original), `source`, `category`, `doc_id`, `chunk_id`, `chunk_index` (posición en el documento) y `section` (encabezado Markdown del chunk).
+- **Híbrido:** `EnsembleRetriever` (BM25 0.5 + Pinecone 0.5). El corpus BM25 se reconstruye desde la metadata de Pinecone (caché en `data/cache/`, que se invalida sola: `ingest` la borra y, además, se descarta si su tamaño no coincide con el namespace de Pinecone), sin otra base de datos.
 
 ```
 src/config.py          configuración y validaciones
@@ -44,11 +44,14 @@ python evaluate.py                 # reporte de métricas
 
 ## Evaluación
 
-Golden set de 5 preguntas con documento fuente conocido (`eval/golden_set.json`). Un chunk es relevante si su `doc_id` es el esperado.
+Golden set de 19 preguntas con documento fuente conocido (`eval/golden_set.json`): 15 con términos técnicos exactos (`WebSocketDisconnect`, `ORJSONResponse`, `convert_underscores`...) y 4 parafraseadas sin la palabra clave. Un chunk es relevante si su `doc_id` es el esperado. `evaluate.py` compara BM25 solo, vectorial solo y el híbrido con tres combinaciones de pesos.
 
 | Método | Recall@5 | Precision@5 |
 |---|---|---|
-| Solo vectorial | 1.00 | 0.52 |
-| Híbrido (BM25 + vector) | 1.00 | 0.48 |
+| Solo BM25 | 0.95 | 0.41 |
+| Solo vectorial | 0.95 | 0.46 |
+| Híbrido bm25=0.3 / vec=0.7 | **1.00** | **0.46** |
+| Híbrido bm25=0.5 / vec=0.5 (por defecto) | **1.00** | 0.45 |
+| Híbrido bm25=0.7 / vec=0.3 | 0.95 | 0.42 |
 
-**Lectura:** ambos recuperan el documento correcto en las 5 preguntas. El híbrido no mejora en este set: las preguntas ya contienen términos que el modelo semántico resuelve bien y el set es muy pequeño (5 preguntas), por lo que la diferencia de 0.04 no es significativa. Precision@5 tiene un techo bajo en documentos de pocos chunks (p. ej. `static-files` tiene muy pocos, así que no puede llenar 5 posiciones). Para ver el aporte de BM25 conviene ampliar el golden set con identificadores exactos y ajustar los pesos en `RAGSystem(weights=...)`.
+**Lectura:** el híbrido es el único que recupera el documento correcto en las 19 preguntas (cada método por separado falla una distinta), lo que respalda combinar ambas señales. En Precision@5 la mejora es marginal (0.45-0.46 vs 0.46 vectorial): el techo es bajo porque muchos documentos tienen pocos chunks y no pueden llenar 5 posiciones. Con n=19 la diferencia de un solo acierto en Recall no es estadísticamente concluyente; conviene ampliar el set antes de fijar los pesos. Los pesos se cambian con `RAGSystem(weights=(bm25, vector))`.
