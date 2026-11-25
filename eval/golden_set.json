@@ -1,0 +1,7 @@
+﻿[
+  {"pregunta": "How do I run a function in the background after returning a response using BackgroundTasks?", "documento_id_esperado": "tutorial/background-tasks"},
+  {"pregunta": "How do I enable CORSMiddleware and configure allow_origins?", "documento_id_esperado": "tutorial/cors"},
+  {"pregunta": "How do I receive an uploaded file with UploadFile?", "documento_id_esperado": "tutorial/request-files"},
+  {"pregunta": "How do I return an HTTP error to the client by raising HTTPException with a status code?", "documento_id_esperado": "tutorial/handling-errors"},
+  {"pregunta": "How can I serve static files such as images or CSS from a directory with StaticFiles?", "documento_id_esperado": "tutorial/static-files"}
+]
