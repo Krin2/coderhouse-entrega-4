@@ -28,6 +28,8 @@ class Settings:
     # Chunking (en tokens) y recuperación
     chunk_size: int = 600
     chunk_overlap: int = 80
+    min_chunk_tokens: int = 200      # los chunks menores se fusionan con su vecino...
+    max_chunk_tokens: int = 800      # ...sin pasar de este tope (rango ~500-800 de la consigna)
     top_k: int = 5
 
     # Rutas
