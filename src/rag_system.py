@@ -2,7 +2,6 @@
 import json
 import os
 import re
-from pathlib import Path
 
 from langchain_classic.retrievers import EnsembleRetriever
 from langchain_community.retrievers import BM25Retriever
@@ -12,8 +11,6 @@ from pinecone import Pinecone
 from src import config
 from src.vectorstore import get_vectorstore
 
-CACHE = Path("data/cache/corpus.jsonl")
-
 
 def _tokenize(text: str) -> list[str]:
     return re.findall(r"[a-z0-9_]+", text.lower())   # 'Depends(' == 'depends'
@@ -21,11 +18,15 @@ def _tokenize(text: str) -> list[str]:
 
 def load_corpus_from_pinecone(use_cache: bool = True) -> list[Document]:
     """Reconstruye el corpus léxico desde la metadata de Pinecone (sin otra BD)."""
-    if use_cache and CACHE.exists():
-        rows = [json.loads(l) for l in CACHE.read_text(encoding="utf-8").splitlines()]
-        return [Document(page_content=r.pop("text"), metadata=r) for r in rows]
-
     index = Pinecone(api_key=os.environ["PINECONE_API_KEY"]).Index(config.INDEX_NAME)
+    if use_cache and config.CORPUS_CACHE.exists():
+        rows = [json.loads(l) for l in config.CORPUS_CACHE.read_text(encoding="utf-8").splitlines()]
+        remote = index.describe_index_stats().namespaces.get(config.NAMESPACE)
+        remote_n = remote.vector_count if remote else 0
+        if len(rows) == remote_n:                 # caché válida solo si coincide con Pinecone
+            return [Document(page_content=r.pop("text"), metadata=r) for r in rows]
+        print(f"[cache] obsoleta ({len(rows)} vs {remote_n} en Pinecone): reconstruyendo")
+
     ids = [i for page in index.list(namespace=config.NAMESPACE) for i in page]
     docs = []
     for start in range(0, len(ids), 100):
@@ -33,8 +34,8 @@ def load_corpus_from_pinecone(use_cache: bool = True) -> list[Document]:
         for v in res.vectors.values():
             meta = dict(v.metadata)
             docs.append(Document(page_content=meta.pop("text"), metadata=meta))
-    CACHE.parent.mkdir(parents=True, exist_ok=True)
-    with CACHE.open("w", encoding="utf-8") as f:
+    config.CORPUS_CACHE.parent.mkdir(parents=True, exist_ok=True)
+    with config.CORPUS_CACHE.open("w", encoding="utf-8") as f:
         for d in docs:
             f.write(json.dumps({**d.metadata, "text": d.page_content}, ensure_ascii=False) + "\n")
     return docs
@@ -67,3 +68,4 @@ if __name__ == "__main__":
         print(f"\n> {q}")
         for d in rag.retrieve(q):
             print("  ", d.metadata["chunk_id"], "|", d.page_content[:60].replace("\n", " "))
+

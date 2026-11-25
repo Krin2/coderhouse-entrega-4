@@ -1,4 +1,5 @@
 ﻿"""Pipeline de ingesta: Markdown -> chunks -> embeddings -> Pinecone (con metadata)."""
+import os
 import re
 import sys
 from pathlib import Path
@@ -7,6 +8,7 @@ from langchain_core.documents import Document
 from langchain_openai import OpenAIEmbeddings
 from langchain_pinecone import PineconeVectorStore
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from pinecone import Pinecone
 
 from src import config
 from src.pinecone_setup import ensure_index
@@ -39,12 +41,29 @@ def split_documents(docs: list[Document]) -> list[Document]:
     )
     chunks = splitter.split_documents(docs)
     counters: dict[str, int] = {}
+    section, last_doc = "", None
     for c in chunks:
+        if c.metadata["doc_id"] != last_doc:
+            section, last_doc = "", c.metadata["doc_id"]
         n = counters.get(c.metadata["doc_id"], 0)
         counters[c.metadata["doc_id"]] = n + 1
-        c.metadata["page"] = n                              # índice de chunk dentro del documento
+        c.metadata["chunk_index"] = n                       # posición del chunk en el documento
+        heads = re.findall(r"^#{1,4}\s+(.*?)(?:\s*\{ #.*\})?\s*$", c.page_content, re.M)
+        section = heads[0] if heads else section            # sin encabezado propio: hereda el anterior
+        c.metadata["section"] = section
         c.metadata["chunk_id"] = f'{c.metadata["doc_id"]}#{n}'
     return chunks
+
+
+def reset_namespace() -> None:
+    """Deja el namespace como espejo de data/raw e invalida la caché BM25."""
+    index = Pinecone(api_key=os.environ["PINECONE_API_KEY"]).Index(config.INDEX_NAME)
+    try:
+        index.delete(delete_all=True, namespace=config.NAMESPACE)
+    except Exception as exc:                      # namespace inexistente en la 1a ingesta
+        if "not found" not in str(exc).lower():
+            raise
+    config.CORPUS_CACHE.unlink(missing_ok=True)
 
 
 def ingest() -> int:
@@ -56,10 +75,13 @@ def ingest() -> int:
     chunks = split_documents(docs)
     print(f"{len(docs)} documentos -> {len(chunks)} chunks")
 
+    reset_namespace()
     embeddings = OpenAIEmbeddings(model=config.EMBEDDING_MODEL)
     store = PineconeVectorStore(
-        index_name=config.INDEX_NAME, embedding=embeddings,
-        namespace=config.NAMESPACE, text_key="text",   # el texto vive en la metadata
+        index_name=config.INDEX_NAME,
+        embedding=embeddings,
+        namespace=config.NAMESPACE,
+        text_key="text",   # el texto vive en la metadata
     )
     # ids determinísticos -> reingestar es idempotente
     store.add_documents(chunks, ids=[c.metadata["chunk_id"] for c in chunks], batch_size=100)
@@ -69,3 +91,4 @@ def ingest() -> int:
 
 if __name__ == "__main__":
     ingest()
+

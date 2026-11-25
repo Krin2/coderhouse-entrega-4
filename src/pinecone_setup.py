@@ -1,5 +1,6 @@
 ﻿"""Crea el índice Serverless si no existe y valida su dimensión."""
 import os
+import time
 from pinecone import Pinecone, ServerlessSpec
 from src import config
 
@@ -25,6 +26,8 @@ def ensure_index() -> str:
             spec=ServerlessSpec(cloud=config.CLOUD, region=config.REGION),
         )
         print(f"[ok] Índice '{config.INDEX_NAME}' creado (Serverless {config.CLOUD}/{config.REGION}).")
+    while not pc.describe_index(config.INDEX_NAME).status["ready"]:   # espera a que esté listo
+        time.sleep(2)
     return config.INDEX_NAME
 
 
