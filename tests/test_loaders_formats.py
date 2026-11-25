@@ -1,29 +1,94 @@
-﻿import json
+import json
 
 import pytest
 
-from src.ingestion.chunking import split_documents
+from src.ingestion.chunking import split_documents, start_page
 from src.ingestion.loaders import CompositeLoader, JsonLoader, MarkdownLoader, PdfLoader, default_loader
 from tests.conftest import make_pdf
 
 
 # ---------- PDF ----------
-def test_pdf_una_pagina_por_documento_con_numero_real(tmp_path):
+def _chunks(pdf_dir, size=600, overlap=0):
+    return split_documents(PdfLoader(pdf_dir).load(), chunk_size=size, chunk_overlap=overlap)
+
+
+def test_pdf_un_documento_por_archivo_con_mapa_de_paginas(tmp_path):
     (tmp_path / "guias").mkdir()
     make_pdf(tmp_path / "guias" / "manual.pdf", ["Capitulo uno\nsobre cache", "Capitulo dos", "Capitulo tres"])
+    (doc,) = PdfLoader(tmp_path).load()
+    assert "Capitulo uno" in doc.page_content and "Capitulo tres" in doc.page_content
+    assert [p for _, p in doc.metadata["page_map"]] == [1, 2, 3]
+    assert {k: v for k, v in doc.metadata.items() if k != "page_map"} == {
+        "source": "guias/manual.pdf", "doc_id": "guias/manual", "category": "guias", "total_pages": 3}
+
+
+def test_pdf_offsets_apuntan_al_inicio_real_de_cada_pagina(tmp_path):
+    make_pdf(tmp_path / "m.pdf", ["alpha uno", "beta dos", "gamma tres"])
+    (doc,) = PdfLoader(tmp_path).load()
+    for (offset, _), word in zip(doc.metadata["page_map"], ("alpha", "beta", "gamma")):
+        assert doc.page_content[offset:].startswith(word)
+
+
+def test_pdf_chunk_que_cruza_paginas_usa_la_pagina_de_inicio(tmp_path):
+    make_pdf(tmp_path / "doc.pdf", ["alpha " * 8, "beta " * 8, "gamma " * 8])
+    chunks = _chunks(tmp_path, size=40)
+    crossing = [c for c in chunks if "alpha" in c.page_content and "beta" in c.page_content]
+    assert crossing and crossing[0].metadata["page"] == 1              # empieza en 1 aunque llegue a la 2
+    assert all(isinstance(c.metadata["page"], int) for c in chunks)
+
+
+def test_pdf_multilinea_realista_cruza_paginas_y_conserva_la_de_inicio(tmp_path):
+    def page(tag):
+        return "\n".join(" ".join(f"{tag}_{line}_{w}" for w in range(10)) for line in range(14))
+
+    make_pdf(tmp_path / "informe.pdf", [page("p1"), page("p2"), page("p3")])
+    chunks = _chunks(tmp_path, size=200, overlap=30)
+    crossing = [c for c in chunks if {"p1_", "p2_"} <= {w[:3] for w in c.page_content.split()}]
+    assert crossing and all(c.metadata["page"] == 1 for c in crossing)       # mezcla p1 y p2, página = 1
+    only_p2 = [c for c in chunks if all(w.startswith("p2_") for w in c.page_content.split())]
+    assert only_p2 and all(c.metadata["page"] == 2 for c in only_p2)
+
+
+def test_pdf_paginas_monotonas_y_cubren_el_documento(tmp_path):
+    make_pdf(tmp_path / "doc.pdf", [f"pagina{i} " * 30 for i in range(1, 6)])
+    pages = [c.metadata["page"] for c in _chunks(tmp_path, size=25)]
+    assert pages == sorted(pages) and pages[0] == 1 and pages[-1] == 5
+
+
+def test_pdf_chunks_no_llevan_metadata_interna(tmp_path):
+    make_pdf(tmp_path / "doc.pdf", ["uno", "dos"])
+    for chunk in _chunks(tmp_path):
+        assert not {"page_map", "start_index"} & chunk.metadata.keys()
+        assert chunk.metadata["total_pages"] == 2 and "section" not in chunk.metadata
+
+
+def test_pdf_ids_de_chunk_continuos_a_traves_de_paginas(tmp_path):
+    make_pdf(tmp_path / "doc.pdf", ["alpha " * 30, "beta " * 30])
+    chunks = _chunks(tmp_path, size=20)
+    assert [c.metadata["chunk_id"] for c in chunks] == [f"doc#{i}" for i in range(len(chunks))]
+
+
+def test_split_documents_no_muta_la_entrada(tmp_path):
+    make_pdf(tmp_path / "doc.pdf", ["uno", "dos"])
     docs = PdfLoader(tmp_path).load()
-    assert [d.metadata["page"] for d in docs] == [1, 2, 3]
-    first = docs[0]
-    assert "Capitulo uno" in first.page_content and "sobre cache" in first.page_content
-    assert first.metadata | {"page": 1} == {"source": "guias/manual.pdf", "doc_id": "guias/manual",
-                                            "category": "guias", "page": 1, "total_pages": 3}
+    split_documents(docs, chunk_size=600, chunk_overlap=0)
+    assert "page_map" in docs[0].metadata
+    split_documents(docs, chunk_size=600, chunk_overlap=0)           # segunda vez: mismas páginas
+    assert split_documents(docs, chunk_size=600, chunk_overlap=0)[0].metadata["page"] == 1
 
 
 def test_pdf_omite_paginas_sin_texto_y_las_registra(tmp_path):
     make_pdf(tmp_path / "scan.pdf", ["hola", "", "adios"])
     loader = PdfLoader(tmp_path)
-    assert [d.metadata["page"] for d in loader.load()] == [1, 3]
+    (doc,) = loader.load()
+    assert [p for _, p in doc.metadata["page_map"]] == [1, 3]
     assert loader.skipped_pages == [("scan.pdf", 2)]
+
+
+def test_pdf_sin_ningun_texto_no_genera_documento(tmp_path):
+    make_pdf(tmp_path / "vacio.pdf", ["", ""])
+    loader = PdfLoader(tmp_path)
+    assert loader.load() == [] and len(loader.skipped_pages) == 2
 
 
 def test_pdf_categoria_general_en_la_raiz(tmp_path):
@@ -37,12 +102,10 @@ def test_pdf_corrupto_falla_de_forma_explicita(tmp_path):
         PdfLoader(tmp_path).load()
 
 
-def test_pdf_la_pagina_llega_a_los_chunks(tmp_path):
-    make_pdf(tmp_path / "doc.pdf", ["primera pagina", "segunda pagina"])
-    chunks = split_documents(PdfLoader(tmp_path).load(), chunk_size=600, chunk_overlap=80)
-    assert [(c.metadata["chunk_id"], c.metadata["page"]) for c in chunks] == [("doc#0", 1), ("doc#1", 2)]
-    assert all("section" not in c.metadata for c in chunks)               # sin encabezados: no se guarda vacío
-
+def test_start_page():
+    page_map = [(0, 1), (100, 2), (250, 4)]
+    assert [start_page(page_map, i, 9) for i in (0, 99, 100, 249, 250, 999)] == [1, 1, 2, 2, 4, 4]
+    assert start_page(page_map, -1, 9) == 9                           # índice no encontrado => fallback
 
 # ---------- JSON ----------
 def _write(path, data):
@@ -117,9 +180,9 @@ def test_compuesto_rechaza_doc_id_repetido_entre_archivos(tmp_path):
         default_loader(tmp_path).load()
 
 
-def test_compuesto_permite_paginas_del_mismo_archivo(tmp_path):
+def test_compuesto_mismo_archivo_dos_veces_no_es_conflicto(tmp_path):
     make_pdf(tmp_path / "m.pdf", ["a", "b"])
-    assert len(CompositeLoader([PdfLoader(tmp_path)]).load()) == 2
+    assert len(CompositeLoader([PdfLoader(tmp_path), PdfLoader(tmp_path)]).load()) == 2
 
 
 def test_markdown_sigue_ignorando_otros_formatos(tmp_path):

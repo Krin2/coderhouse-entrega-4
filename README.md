@@ -37,7 +37,7 @@ tests/                  pytest: unitarios sin red + 1 de integración
 | Formato | Unidad | Metadata propia |
 |---|---|---|
 | `.md` | un documento por archivo | `section` (encabezado del chunk), `category` = carpeta |
-| `.pdf` | un documento **por página** | `page` real (1-based), `total_pages`, `title` si el PDF la trae |
+| `.pdf` | un documento por archivo; los chunks pueden cruzar páginas | `page` = página donde **empieza** el chunk (1-based), `total_pages`, `title` si el PDF la trae |
 | `.json` / `.jsonl` | un documento por registro | `category`, `tags` y cualquier campo escalar o lista de str del registro |
 
 ```json
@@ -45,7 +45,7 @@ tests/                  pytest: unitarios sin red + 1 de integración
 ```
 
 - `doc_id` es la ruta sin extensión (`runbooks/operaciones`); en JSON, `<archivo>/<id>`. Si dos archivos producen el mismo `doc_id` (p. ej. `guia.md` y `guia.pdf`) la ingesta falla con un error explícito.
-- Los chunks **no cruzan páginas**, para que `page` sea exacto. Las páginas sin texto (PDF escaneados, sin OCR) se omiten y quedan en `PdfLoader.skipped_pages`; un PDF cifrado con contraseña falla.
+- Los chunks **cruzan páginas** (el salto de página es un salto de línea más) y `page` es la página donde empieza el chunk: uno que mezcla el final de la 3 con el comienzo de la 4 lleva `page: 3`. Las páginas sin texto (PDF escaneados, sin OCR) se omiten y quedan en `PdfLoader.skipped_pages`; un PDF cifrado con contraseña falla.
 - Los registros JSON inválidos (sin texto, ids repetidos, estructura que no es lista de objetos) fallan indicando `archivo[posición]`. Los campos anidados no se indexan (Pinecone solo admite escalares y listas de texto), y `source`, `doc_id`, `chunk_id`, `chunk_index` y `text` no se pueden sobrescribir.
 - Verificado contra Pinecone real con un PDF de 3 páginas y un JSON con etiquetas: la consulta *"how do I fail over the database"* devuelve la página 2 del PDF en primer lugar, y `--category cuentas` filtra por el campo del JSON. Los tests de los loaders generan los PDF al vuelo, sin archivos binarios en el repo.
 ## Replicar el índice (PowerShell)
@@ -135,7 +135,7 @@ El filtro se aplica a ambos recuperadores: BM25 se construye sobre el subcorpus 
 ## Tests
 
 ```powershell
-pytest                    # 101 tests unitarios, sin red (corpus y vectorstore falsos)
+pytest                    # 109 tests unitarios, sin red (corpus y vectorstore falsos)
 pytest -m integration   # prueba contra Pinecone/OpenAI reales (requiere .env)
 ```
 
