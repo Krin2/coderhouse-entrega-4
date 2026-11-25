@@ -1,7 +1,78 @@
-﻿[
-  {"pregunta": "How do I run a function in the background after returning a response using BackgroundTasks?", "documento_id_esperado": "tutorial/background-tasks"},
-  {"pregunta": "How do I enable CORSMiddleware and configure allow_origins?", "documento_id_esperado": "tutorial/cors"},
-  {"pregunta": "How do I receive an uploaded file with UploadFile?", "documento_id_esperado": "tutorial/request-files"},
-  {"pregunta": "How do I return an HTTP error to the client by raising HTTPException with a status code?", "documento_id_esperado": "tutorial/handling-errors"},
-  {"pregunta": "How can I serve static files such as images or CSS from a directory with StaticFiles?", "documento_id_esperado": "tutorial/static-files"}
+[
+    {
+        "pregunta":  "How do I run a function in the background after returning a response using BackgroundTasks?",
+        "documento_id_esperado":  "tutorial/background-tasks"
+    },
+    {
+        "pregunta":  "How do I enable CORSMiddleware and configure allow_origins?",
+        "documento_id_esperado":  "tutorial/cors"
+    },
+    {
+        "pregunta":  "How do I receive an uploaded file with UploadFile?",
+        "documento_id_esperado":  "tutorial/request-files"
+    },
+    {
+        "pregunta":  "How do I return an HTTP error to the client by raising HTTPException with a status code?",
+        "documento_id_esperado":  "tutorial/handling-errors"
+    },
+    {
+        "pregunta":  "How can I serve static files such as images or CSS from a directory with StaticFiles?",
+        "documento_id_esperado":  "tutorial/static-files"
+    },
+    {
+        "pregunta":  "What exception do I catch to detect that a WebSocketDisconnect happened?",
+        "documento_id_esperado":  "advanced/websockets"
+    },
+    {
+        "pregunta":  "How do I add code that runs before and after each request with @app.middleware?",
+        "documento_id_esperado":  "tutorial/middleware"
+    },
+    {
+        "pregunta":  "How do I declare an HttpUrl field inside a nested Pydantic model?",
+        "documento_id_esperado":  "tutorial/body-nested-models"
+    },
+    {
+        "pregunta":  "How do I receive HTML form fields with Form instead of JSON?",
+        "documento_id_esperado":  "tutorial/request-forms"
+    },
+    {
+        "pregunta":  "How do I use ORJSONResponse to return faster JSON responses?",
+        "documento_id_esperado":  "advanced/custom-response"
+    },
+    {
+        "pregunta":  "How do I write tests for my app using TestClient?",
+        "documento_id_esperado":  "tutorial/testing"
+    },
+    {
+        "pregunta":  "How do I restrict a path parameter to predefined values using an Enum?",
+        "documento_id_esperado":  "tutorial/path-params"
+    },
+    {
+        "pregunta":  "Why does convert_underscores matter when reading a header parameter?",
+        "documento_id_esperado":  "tutorial/header-params"
+    },
+    {
+        "pregunta":  "How do I read a Cookie parameter in a path operation?",
+        "documento_id_esperado":  "tutorial/cookie-params"
+    },
+    {
+        "pregunta":  "How do I run startup and shutdown logic with the lifespan parameter?",
+        "documento_id_esperado":  "advanced/events"
+    },
+    {
+        "pregunta":  "How do I define SQLModel tables and connect to a SQL database?",
+        "documento_id_esperado":  "tutorial/sql-databases"
+    },
+    {
+        "pregunta":  "How do I render HTML pages using Jinja2Templates?",
+        "documento_id_esperado":  "advanced/templates"
+    },
+    {
+        "pregunta":  "How can I make sure a numeric URL parameter is greater than zero?",
+        "documento_id_esperado":  "tutorial/path-params-numeric-validations"
+    },
+    {
+        "pregunta":  "How do I let a frontend served from another domain call my API in the browser?",
+        "documento_id_esperado":  "tutorial/cors"
+    }
 ]
