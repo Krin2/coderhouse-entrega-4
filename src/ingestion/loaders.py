@@ -92,9 +92,14 @@ def _category(rel: Path) -> str:
     return rel.parts[0] if len(rel.parts) > 1 else "general"
 
 
+PAGE_SEPARATOR = "\n"            # un salto de línea más: con "\n\n" el splitter cortaría siempre en cada página
+PAGE_MAP_KEY = "page_map"        # interno: [(offset, página)]; el chunking lo convierte en `page` y lo elimina
+
+
 class PdfLoader:
-    """Un Document por página de cada .pdf, con el número de página real (`page`, 1-based).
-    Las páginas sin texto (escaneadas) se omiten y se cuentan en `skipped_pages`."""
+    """Un Document por .pdf (el texto de todas sus páginas). Guarda dónde empieza cada página para que, tras
+    el chunking, cada chunk (que puede cruzar páginas) lleve en `page` la página donde empieza (1-based).
+    Las páginas sin texto (escaneadas) se omiten y se registran en `skipped_pages`."""
 
     def __init__(self, raw_dir: Path):
         self.raw_dir = Path(raw_dir)
@@ -109,16 +114,23 @@ class PdfLoader:
             if reader.is_encrypted and not reader.decrypt(""):
                 raise ValueError(f"{rel.as_posix()} está cifrado con contraseña: no se puede indexar")
             title = (reader.metadata.title if reader.metadata else None) or ""
+            texts, page_map, offset = [], [], 0
             for number, page in enumerate(reader.pages, start=1):
                 text = self._clean(page.extract_text() or "")
                 if not text:
                     self.skipped_pages.append((rel.as_posix(), number))
                     continue
-                metadata = {"source": rel.as_posix(), "doc_id": rel.with_suffix("").as_posix(),
-                            "category": _category(rel), "page": number, "total_pages": len(reader.pages)}
-                if title:
-                    metadata["title"] = title
-                docs.append(Document(page_content=text, metadata=metadata))
+                page_map.append((offset, number))
+                texts.append(text)
+                offset += len(text) + len(PAGE_SEPARATOR)
+            if not texts:
+                continue
+            metadata = {"source": rel.as_posix(), "doc_id": rel.with_suffix("").as_posix(),
+                        "category": _category(rel), "total_pages": len(reader.pages),
+                        PAGE_MAP_KEY: page_map}
+            if title:
+                metadata["title"] = title
+            docs.append(Document(page_content=PAGE_SEPARATOR.join(texts), metadata=metadata))
         return docs
 
     @staticmethod
