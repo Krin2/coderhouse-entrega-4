@@ -1,24 +1,18 @@
-﻿"""Fábrica del PineconeVectorStore y del retriever semántico."""
+﻿"""Fábrica del PineconeVectorStore (el texto vive en la metadata, `text_key="text"`)."""
+from __future__ import annotations
+
 from langchain_openai import OpenAIEmbeddings
 from langchain_pinecone import PineconeVectorStore
 
-from src import config
+from src.settings import Settings
 
 
-def get_vectorstore() -> PineconeVectorStore:
-    config.require_keys()
+def get_vectorstore(settings: Settings) -> PineconeVectorStore:
+    settings.require_keys()
     return PineconeVectorStore(
-        index_name=config.INDEX_NAME,
-        embedding=OpenAIEmbeddings(model=config.EMBEDDING_MODEL),
-        namespace=config.NAMESPACE,
+        index_name=settings.index_name,
+        embedding=OpenAIEmbeddings(model=settings.embedding_model, api_key=settings.openai_api_key),
+        namespace=settings.namespace,
         text_key="text",
+        pinecone_api_key=settings.pinecone_api_key,
     )
-
-
-def get_semantic_retriever(k: int = config.TOP_K):
-    return get_vectorstore().as_retriever(search_kwargs={"k": k})
-
-
-if __name__ == "__main__":
-    for d in get_semantic_retriever().invoke("How do I declare optional query parameters?"):
-        print(d.metadata["chunk_id"], "|", d.page_content[:70].replace("\n", " "))

@@ -11,13 +11,23 @@ Módulo de recuperación híbrido (BM25 + vectorial) sobre Pinecone Serverless, 
 - **Híbrido:** `EnsembleRetriever` (BM25 0.5 + Pinecone 0.5). El corpus BM25 se reconstruye desde la metadata de Pinecone (caché en `data/cache/`, que se invalida sola: `ingest` la borra y, además, se descarta si su tamaño no coincide con el namespace de Pinecone), sin otra base de datos.
 
 ```
-src/config.py          configuración y validaciones
-src/pinecone_setup.py  crea el índice si no existe y valida la dimensión
-src/ingest.py          carga -> chunking -> embeddings -> upsert
-src/vectorstore.py     PineconeVectorStore / retriever semántico
-src/rag_system.py      clase RAGSystem (EnsembleRetriever)
-evaluate.py            Recall@5 y Precision@5 sobre eval/golden_set.json
-tests/                 pytest (unitarios sin red + 1 de integración)
+src/
+├─ settings.py          Settings (dataclass inmutable; el entorno se lee con Settings.from_env())
+├─ infra/index.py       cliente Pinecone y creación idempotente del índice Serverless
+├─ ingestion/
+│  ├─ loaders.py        MarkdownLoader (protocolo Loader: añadir PDF/JSON = una clase)
+│  ├─ chunking.py       chunks por tokens + metadata (chunk_id, chunk_index, section)
+│  └─ pipeline.py       IngestPipeline: loader -> chunking -> reset namespace -> Pinecone
+├─ retrieval/
+│  ├─ corpus.py         PineconeCorpus: corpus BM25 desde Pinecone, con caché que se invalida sola
+│  ├─ lexical.py        BM25 + tokenizador
+│  └─ hybrid.py         HybridRetriever (EnsembleRetriever, filtros por categoría; agnóstico de Pinecone)
+├─ rag_system.py        RAGSystem: fachada lista para usar (Settings + Pinecone + OpenAI)
+├─ vectorstore.py       fábrica del PineconeVectorStore
+├─ evaluation/          metrics.py (Precision/Recall@k) y runner.py (comparación y reporte)
+└─ cli.py               python -m src.cli {setup,ingest,query,evaluate}
+evaluate.py             punto de entrada de la consigna (= `python -m src.cli evaluate`)
+tests/                  pytest: unitarios sin red + 1 de integración
 ```
 
 ## Replicar el índice (PowerShell)
@@ -35,10 +45,10 @@ $s = "$env:TEMP\fastapi_src\docs\en\docs"
 foreach ($d in 'tutorial','advanced') { New-Item -ItemType Directory -Force data\raw\$d | Out-Null; Copy-Item "$s\$d\*.md" data\raw\$d }
 Copy-Item "$s\async.md","$s\features.md" data\raw
 
-python -m src.pinecone_setup       # crea el índice (idempotente)
-python -m src.ingest               # 75 documentos -> 271 chunks
-python -m src.rag_system           # prueba rápida del recuperador
-python evaluate.py                 # reporte de métricas
+python -m src.cli setup            # crea el índice (idempotente)
+python -m src.cli ingest           # 75 documentos -> 271 chunks
+python -m src.cli query "lifespan events" --category advanced   # prueba rápida
+python evaluate.py                 # reporte de métricas (= python -m src.cli evaluate)
 ```
 
 `.env` nunca se sube al repo (está en `.gitignore`); la plantilla es `.env.example`.
@@ -72,6 +82,12 @@ El filtro se aplica a ambos recuperadores: BM25 se construye sobre el subcorpus 
 ## Tests
 
 ```powershell
-pytest                    # 19 tests unitarios, sin red (corpus y vectorstore falsos)
+pytest                    # 43 tests unitarios, sin red (corpus y vectorstore falsos)
 pytest -m integration   # prueba contra Pinecone/OpenAI reales (requiere .env)
 ```
+
+## Calidad
+
+```powershell
+ruff check .             # lint (configurado en pyproject.toml)
+```n
