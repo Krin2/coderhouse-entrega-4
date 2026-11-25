@@ -15,7 +15,8 @@ class RAGSystem(HybridRetriever):
     `corpus` y `vectorstore` se pueden inyectar (tests, otros backends)."""
 
     def __init__(self, settings: Settings | None = None, *, k: int | None = None, weights=(0.5, 0.5),
-                 use_cache: bool = True, corpus: list[Document] | None = None, vectorstore=None):
+                 use_cache: bool = True, corpus: list[Document] | None = None, vectorstore=None,
+                 cache_queries: bool = False):
         self.settings = settings or Settings.from_env()
         if corpus is None or vectorstore is None:
             self.settings.require_keys()
@@ -23,4 +24,5 @@ class RAGSystem(HybridRetriever):
             corpus = PineconeCorpus(self.settings, get_index(self.settings), use_cache).load()
         if vectorstore is None:
             vectorstore = get_vectorstore(self.settings)
-        super().__init__(corpus, vectorstore, k=k or self.settings.top_k, weights=weights)
+        super().__init__(corpus, vectorstore, k=k or self.settings.top_k, weights=weights,
+                         cache_queries=cache_queries)

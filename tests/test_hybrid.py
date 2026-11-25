@@ -63,6 +63,19 @@ def test_retrievers_por_categoria_se_cachean(corpus, fake_store):
     assert len(fake_store.calls) == n
 
 
+def test_cache_queries_evita_repetir_consultas_al_vectorstore(corpus, fake_store):
+    rag = HybridRetriever(corpus, fake_store, k=2, cache_queries=True)
+    inner = rag.semantic.inner
+    hits = []
+    original = inner.invoke
+    object.__setattr__(inner, "invoke", lambda q, *a, **kw: hits.append(q) or original(q, *a, **kw))
+    for _ in range(2):
+        rag.retrieve("lifespan")
+    rag.retrieve_semantic("lifespan")
+    assert hits == ["lifespan"]
+    assert rag.retrieve("lifespan") == rag.retrieve("lifespan")
+
+
 def test_ragsystem_acepta_inyeccion_sin_credenciales(corpus, fake_store):
     rag = RAGSystem(corpus=corpus, vectorstore=fake_store, k=2)
     assert rag.k == 2 and len(rag.retrieve("BackgroundTasks")) <= 2
