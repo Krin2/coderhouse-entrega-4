@@ -1,4 +1,4 @@
-﻿# Sistema RAG escalable con Pinecone
+# Sistema RAG escalable con Pinecone
 
 Módulo de recuperación híbrido (BM25 + vectorial) sobre Pinecone Serverless, con la documentación Markdown de FastAPI como corpus.
 
@@ -17,6 +17,7 @@ src/ingest.py          carga -> chunking -> embeddings -> upsert
 src/vectorstore.py     PineconeVectorStore / retriever semántico
 src/rag_system.py      clase RAGSystem (EnsembleRetriever)
 evaluate.py            Recall@5 y Precision@5 sobre eval/golden_set.json
+tests/                 pytest (unitarios sin red + 1 de integración)
 ```
 
 ## Replicar el índice (PowerShell)
@@ -50,8 +51,27 @@ Golden set de 19 preguntas con documento fuente conocido (`eval/golden_set.json`
 |---|---|---|
 | Solo BM25 | 0.95 | 0.41 |
 | Solo vectorial | 0.95 | 0.46 |
-| Híbrido bm25=0.3 / vec=0.7 | **1.00** | **0.46** |
+| Híbrido bm25=0.3 / vec=0.7 | **1.00** | 0.46 |
 | Híbrido bm25=0.5 / vec=0.5 (por defecto) | **1.00** | 0.45 |
 | Híbrido bm25=0.7 / vec=0.3 | 0.95 | 0.42 |
+| Híbrido 0.5/0.5 + filtro de categoría* | 1.00 | 0.48 |
+| Solo vectorial + filtro de categoría* | 1.00 | 0.49 |
+
+\* La categoría se toma del documento esperado (oráculo): es una cota superior de lo que aporta el filtro, no un uso realista.
 
 **Lectura:** el híbrido es el único que recupera el documento correcto en las 19 preguntas (cada método por separado falla una distinta), lo que respalda combinar ambas señales. En Precision@5 la mejora es marginal (0.45-0.46 vs 0.46 vectorial): el techo es bajo porque muchos documentos tienen pocos chunks y no pueden llenar 5 posiciones. Con n=19 la diferencia de un solo acierto en Recall no es estadísticamente concluyente; conviene ampliar el set antes de fijar los pesos. Los pesos se cambian con `RAGSystem(weights=(bm25, vector))`.
+
+## Filtro por categoría
+
+```python
+rag = RAGSystem()
+rag.categories                                   # ['advanced', 'tutorial', 'general']
+rag.retrieve("lifespan events", category="advanced")```n
+El filtro se aplica a ambos recuperadores: BM25 se construye sobre el subcorpus de la categoría y Pinecone recibe `filter={'category': {'$eq': ...}}`. Una categoría inexistente lanza `ValueError`.
+
+## Tests
+
+```powershell
+pytest                    # 19 tests unitarios, sin red (corpus y vectorstore falsos)
+pytest -m integration   # prueba contra Pinecone/OpenAI reales (requiere .env)
+```
