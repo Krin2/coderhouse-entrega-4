@@ -32,5 +32,7 @@ def split_documents(docs: list[Document], *, chunk_size: int, chunk_overlap: int
         index = counters.get(doc_id, 0)
         counters[doc_id] = index + 1
         section = extract_section(chunk.page_content, fallback=section)   # sin encabezado: hereda el anterior
-        chunk.metadata.update(chunk_index=index, chunk_id=f"{doc_id}#{index}", section=section)
+        chunk.metadata.update(chunk_index=index, chunk_id=f"{doc_id}#{index}")
+        if section:                                    # PDF/JSON sin encabezados: no se guarda vacío
+            chunk.metadata["section"] = section
     return chunks

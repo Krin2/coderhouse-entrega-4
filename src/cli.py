@@ -23,7 +23,8 @@ def _ingest(settings: Settings, args) -> None:
 def _query(settings: Settings, args) -> None:
     from src.rag_system import RAGSystem
     for d in RAGSystem(settings, k=args.k).retrieve(args.text, category=args.category):
-        print(f"{d.metadata['chunk_id']:<48} | {d.page_content[:60]!r}")
+        page = f" p.{int(d.metadata['page'])}" if "page" in d.metadata else ""
+        print(f"{d.metadata['chunk_id']:<48}{page:<7}| {d.page_content[:60]!r}")
 
 
 def _evaluate(settings: Settings, args) -> None:
@@ -62,6 +63,7 @@ def build_parser() -> argparse.ArgumentParser:
     i = sub.add_parser("ingest", parents=[common], help="documentos -> chunks -> embeddings -> Pinecone")
     i.add_argument("--with-code", action="store_true",
                    help="incrusta el código referenciado por la documentación (data/code)")
+    i.add_argument("--raw-dir", default=None, help="carpeta con .md/.pdf/.json/.jsonl (por defecto, data/raw)")
     i.set_defaults(run=_ingest)
 
     q = sub.add_parser("query", parents=[common], help="consulta el recuperador híbrido")
@@ -97,6 +99,8 @@ def main(argv: list[str] | None = None) -> None:
     overrides = {}
     if getattr(args, "namespace", None):
         overrides["namespace"] = args.namespace
+    if getattr(args, "raw_dir", None):
+        overrides["raw_dir"] = Path(args.raw_dir)
     if getattr(args, "report_dir", None):
         overrides["report_dir"] = Path(args.report_dir)
     args.run(replace(settings, **overrides) if overrides else settings, args)
