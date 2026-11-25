@@ -1,0 +1,4706 @@
+{
+  "k": 5,
+  "seed": 0,
+  "n_bootstrap": 2000,
+  "n_questions": {
+    "all": 48,
+    "dev": 24,
+    "test": 24
+  },
+  "weights_search": [
+    {
+      "bm25": 0.1,
+      "vector": 0.9,
+      "recall": 1.0,
+      "precision": 0.4166666666666667,
+      "norm_precision": 0.8930555555555556,
+      "mrr": 0.9791666666666666,
+      "ndcg": 0.8876817419626817
+    },
+    {
+      "bm25": 0.2,
+      "vector": 0.8,
+      "recall": 1.0,
+      "precision": 0.4166666666666667,
+      "norm_precision": 0.8930555555555556,
+      "mrr": 0.9791666666666666,
+      "ndcg": 0.8888013423711523
+    },
+    {
+      "bm25": 0.3,
+      "vector": 0.7,
+      "recall": 1.0,
+      "precision": 0.4166666666666667,
+      "norm_precision": 0.8930555555555556,
+      "mrr": 0.9791666666666666,
+      "ndcg": 0.8888013423711523
+    },
+    {
+      "bm25": 0.4,
+      "vector": 0.6,
+      "recall": 1.0,
+      "precision": 0.4166666666666667,
+      "norm_precision": 0.8930555555555556,
+      "mrr": 0.9791666666666666,
+      "ndcg": 0.8906417759864959
+    },
+    {
+      "bm25": 0.5,
+      "vector": 0.5,
+      "recall": 1.0,
+      "precision": 0.4166666666666667,
+      "norm_precision": 0.8986111111111111,
+      "mrr": 0.9791666666666666,
+      "ndcg": 0.8970345312178694
+    },
+    {
+      "bm25": 0.6,
+      "vector": 0.4,
+      "recall": 1.0,
+      "precision": 0.42500000000000004,
+      "norm_precision": 0.9,
+      "mrr": 0.9583333333333334,
+      "ndcg": 0.8854559468369819
+    },
+    {
+      "bm25": 0.7,
+      "vector": 0.3,
+      "recall": 1.0,
+      "precision": 0.42500000000000004,
+      "norm_precision": 0.9,
+      "mrr": 0.9375,
+      "ndcg": 0.8762606558153361
+    },
+    {
+      "bm25": 0.8,
+      "vector": 0.2,
+      "recall": 1.0,
+      "precision": 0.42500000000000004,
+      "norm_precision": 0.9,
+      "mrr": 0.9166666666666666,
+      "ndcg": 0.8599030725143927
+    },
+    {
+      "bm25": 0.9,
+      "vector": 0.1,
+      "recall": 1.0,
+      "precision": 0.42500000000000004,
+      "norm_precision": 0.9,
+      "mrr": 0.8958333333333334,
+      "ndcg": 0.8510661734957697
+    }
+  ],
+  "tuned_weights": [
+    0.5,
+    0.5
+  ],
+  "tuned_name": "Híbrido 0.5/0.5",
+  "methods": {
+    "Solo BM25": [
+      {
+        "pregunta": "How do I run a function in the background after returning a response using BackgroundTasks?",
+        "esperado": "tutorial/background-tasks",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I enable CORSMiddleware and configure allow_origins?",
+        "esperado": "tutorial/cors",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.5,
+        "mrr": 1.0,
+        "ndcg": 0.6131471927654584
+      },
+      {
+        "pregunta": "How do I receive an uploaded file with UploadFile?",
+        "esperado": "tutorial/request-files",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I return an HTTP error to the client by raising HTTPException with a status code?",
+        "esperado": "tutorial/handling-errors",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 0.75,
+        "mrr": 1.0,
+        "ndcg": 0.8048099750039491
+      },
+      {
+        "pregunta": "How can I serve static files such as images or CSS from a directory with StaticFiles?",
+        "esperado": "tutorial/static-files",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "What exception do I catch to detect that a WebSocketDisconnect happened?",
+        "esperado": "advanced/websockets",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.3333333333333333,
+        "mrr": 1.0,
+        "ndcg": 0.46927872602275644
+      },
+      {
+        "pregunta": "How do I add code that runs before and after each request with @app.middleware?",
+        "esperado": "tutorial/middleware",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I declare an HttpUrl field inside a nested Pydantic model?",
+        "esperado": "tutorial/body-nested-models",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9469024295259745
+      },
+      {
+        "pregunta": "How do I receive HTML form fields with Form instead of JSON?",
+        "esperado": "tutorial/request-forms",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I use ORJSONResponse to return faster JSON responses?",
+        "esperado": "advanced/custom-response",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 0.0,
+        "precision": 0.0,
+        "norm_precision": 0.0,
+        "mrr": 0.0,
+        "ndcg": 0.0
+      },
+      {
+        "pregunta": "How do I write tests for my app using TestClient?",
+        "esperado": "tutorial/testing",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.5,
+        "mrr": 0.5,
+        "ndcg": 0.44149241373678083
+      },
+      {
+        "pregunta": "How do I restrict a path parameter to predefined values using an Enum?",
+        "esperado": "tutorial/path-params",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.2,
+        "mrr": 1.0,
+        "ndcg": 0.3391602052736161
+      },
+      {
+        "pregunta": "Why does convert_underscores matter when reading a header parameter?",
+        "esperado": "tutorial/header-params",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 0.5,
+        "ndcg": 0.6309297535714575
+      },
+      {
+        "pregunta": "How do I read a Cookie parameter in a path operation?",
+        "esperado": "tutorial/cookie-params",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 0.0,
+        "precision": 0.0,
+        "norm_precision": 0.0,
+        "mrr": 0.0,
+        "ndcg": 0.0
+      },
+      {
+        "pregunta": "How do I run startup and shutdown logic with the lifespan parameter?",
+        "esperado": "advanced/events",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9060254355346823
+      },
+      {
+        "pregunta": "How do I define SQLModel tables and connect to a SQL database?",
+        "esperado": "tutorial/sql-databases",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8687949224876582
+      },
+      {
+        "pregunta": "How do I render HTML pages using Jinja2Templates?",
+        "esperado": "advanced/templates",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I make sure a numeric URL parameter is greater than zero?",
+        "esperado": "tutorial/path-params-numeric-validations",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9469024295259745
+      },
+      {
+        "pregunta": "How do I let a frontend served from another domain call my API in the browser?",
+        "esperado": "tutorial/cors",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.5,
+        "mrr": 1.0,
+        "ndcg": 0.6131471927654584
+      },
+      {
+        "pregunta": "How do I use StreamingResponse with yield to send data to the client in chunks?",
+        "esperado": "advanced/stream-data",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.6666666666666666,
+        "mrr": 1.0,
+        "ndcg": 0.6508205185601091
+      },
+      {
+        "pregunta": "How do I mount a Flask application inside FastAPI using WSGIMiddleware?",
+        "esperado": "advanced/wsgi",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I declare a Query parameter with max_length using Annotated?",
+        "esperado": "tutorial/query-params-str-validations",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8687949224876582
+      },
+      {
+        "pregunta": "How do I use jsonable_encoder to convert a Pydantic model into JSON compatible data?",
+        "esperado": "tutorial/encoder",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I enable TrustedHostMiddleware and HTTPSRedirectMiddleware?",
+        "esperado": "advanced/middleware",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I make my app read its configuration from environment variables?",
+        "esperado": "advanced/settings",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 0.6,
+        "mrr": 1.0,
+        "ndcg": 0.6992148198508501
+      },
+      {
+        "pregunta": "How can an endpoint change the HTTP status code of its response at runtime?",
+        "esperado": "advanced/response-change-status-code",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I set a cookie on the response that goes back to the client?",
+        "esperado": "advanced/response-cookies",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 0.0,
+        "precision": 0.0,
+        "norm_precision": 0.0,
+        "mrr": 0.0,
+        "ndcg": 0.0
+      },
+      {
+        "pregunta": "How can I add custom headers to the response of my endpoint?",
+        "esperado": "advanced/response-headers",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 0.5,
+        "ndcg": 0.6309297535714575
+      },
+      {
+        "pregunta": "How can the server push events to the browser over a single long-lived HTTP connection?",
+        "esperado": "tutorial/server-sent-events",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I swap a dependency for a fake one while running my test suite?",
+        "esperado": "advanced/testing-dependencies",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 0.2,
+        "ndcg": 0.38685280723454163
+      },
+      {
+        "pregunta": "How do I limit the maximum size of the request body my API accepts?",
+        "esperado": "advanced/request-body-limits",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I organize a large application into several files and routers?",
+        "esperado": "tutorial/bigger-applications",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.4,
+        "mrr": 1.0,
+        "ndcg": 0.5087403079104241
+      },
+      {
+        "pregunta": "How do I update only some fields of a stored item instead of replacing all of it?",
+        "esperado": "tutorial/body-updates",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9060254355346823
+      },
+      {
+        "pregunta": "How do I give my generated API documentation a title, description and version?",
+        "esperado": "tutorial/metadata",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.3333333333333333,
+        "mrr": 0.5,
+        "ndcg": 0.2960819109658652
+      },
+      {
+        "pregunta": "How do I make my app work correctly behind a reverse proxy that strips a path prefix?",
+        "esperado": "advanced/behind-a-proxy",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.7860137352654724
+      },
+      {
+        "pregunta": "How can I return a raw response without FastAPI validating or serializing it?",
+        "esperado": "advanced/response-directly",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 0.5,
+        "ndcg": 0.6509209298071326
+      },
+      {
+        "pregunta": "How can I generate a client library for my API in TypeScript?",
+        "esperado": "advanced/generate-clients",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8687949224876582
+      },
+      {
+        "pregunta": "How do I document requests that my API will send to other services when something happens?",
+        "esperado": "advanced/openapi-webhooks",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 0.0,
+        "precision": 0.0,
+        "norm_precision": 0.0,
+        "mrr": 0.0,
+        "ndcg": 0.0
+      },
+      {
+        "pregunta": "How do I control which fields are returned to the client so a password is never exposed?",
+        "esperado": "tutorial/response-model",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.4,
+        "mrr": 0.5,
+        "ndcg": 0.38356636737133565
+      },
+      {
+        "pregunta": "What is the difference between async def and plain def for my endpoints and when should I use each?",
+        "esperado": "async",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 0.6,
+        "mrr": 1.0,
+        "ndcg": 0.639945385422766
+      },
+      {
+        "pregunta": "How can I run my application inside a debugger from my editor?",
+        "esperado": "tutorial/debugging",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 0.5,
+        "ndcg": 0.6509209298071326
+      },
+      {
+        "pregunta": "How do I receive a single plain value in the body next to a model?",
+        "esperado": "tutorial/body-multiple-params",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.5,
+        "mrr": 0.5,
+        "ndcg": 0.38685280723454163
+      },
+      {
+        "pregunta": "How do I make the API reject unexpected extra query parameters?",
+        "esperado": "tutorial/query-param-models",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 0.5,
+        "ndcg": 0.6240505200038379
+      },
+      {
+        "pregunta": "How do I make the API reject unexpected extra cookies?",
+        "esperado": "tutorial/cookie-param-models",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.5,
+        "mrr": 1.0,
+        "ndcg": 0.6131471927654584
+      },
+      {
+        "pregunta": "How can I stop underscores in header names from being converted to hyphens when using a model?",
+        "esperado": "tutorial/header-param-models",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.5,
+        "mrr": 1.0,
+        "ndcg": 0.6131471927654584
+      },
+      {
+        "pregunta": "How do I show an example payload in the interactive documentation?",
+        "esperado": "tutorial/schema-extra-example",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 0.0,
+        "precision": 0.0,
+        "norm_precision": 0.0,
+        "mrr": 0.0,
+        "ndcg": 0.0
+      },
+      {
+        "pregunta": "How do I receive an uploaded file and a regular form field in the same request?",
+        "esperado": "tutorial/request-forms-and-files",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I list other possible responses such as 404 in the OpenAPI docs of an endpoint?",
+        "esperado": "advanced/additional-responses",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.3333333333333333,
+        "mrr": 0.25,
+        "ndcg": 0.20210734650054757
+      }
+    ],
+    "Solo vectorial": [
+      {
+        "pregunta": "How do I run a function in the background after returning a response using BackgroundTasks?",
+        "esperado": "tutorial/background-tasks",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I enable CORSMiddleware and configure allow_origins?",
+        "esperado": "tutorial/cors",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I receive an uploaded file with UploadFile?",
+        "esperado": "tutorial/request-files",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9828920819566879
+      },
+      {
+        "pregunta": "How do I return an HTTP error to the client by raising HTTPException with a status code?",
+        "esperado": "tutorial/handling-errors",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.5,
+        "mrr": 1.0,
+        "ndcg": 0.5413996682199069
+      },
+      {
+        "pregunta": "How can I serve static files such as images or CSS from a directory with StaticFiles?",
+        "esperado": "tutorial/static-files",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "What exception do I catch to detect that a WebSocketDisconnect happened?",
+        "esperado": "advanced/websockets",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9060254355346823
+      },
+      {
+        "pregunta": "How do I add code that runs before and after each request with @app.middleware?",
+        "esperado": "tutorial/middleware",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I declare an HttpUrl field inside a nested Pydantic model?",
+        "esperado": "tutorial/body-nested-models",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.3333333333333333,
+        "mrr": 1.0,
+        "ndcg": 0.46927872602275644
+      },
+      {
+        "pregunta": "How do I receive HTML form fields with Form instead of JSON?",
+        "esperado": "tutorial/request-forms",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I use ORJSONResponse to return faster JSON responses?",
+        "esperado": "advanced/custom-response",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.4,
+        "mrr": 1.0,
+        "ndcg": 0.5087403079104241
+      },
+      {
+        "pregunta": "How do I write tests for my app using TestClient?",
+        "esperado": "tutorial/testing",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.5,
+        "mrr": 1.0,
+        "ndcg": 0.5413996682199069
+      },
+      {
+        "pregunta": "How do I restrict a path parameter to predefined values using an Enum?",
+        "esperado": "tutorial/path-params",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.4,
+        "mrr": 1.0,
+        "ndcg": 0.48522855511632257
+      },
+      {
+        "pregunta": "Why does convert_underscores matter when reading a header parameter?",
+        "esperado": "tutorial/header-params",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I read a Cookie parameter in a path operation?",
+        "esperado": "tutorial/cookie-params",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I run startup and shutdown logic with the lifespan parameter?",
+        "esperado": "advanced/events",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 1.0,
+        "mrr": 0.5,
+        "ndcg": 0.7328286204777911
+      },
+      {
+        "pregunta": "How do I define SQLModel tables and connect to a SQL database?",
+        "esperado": "tutorial/sql-databases",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8687949224876582
+      },
+      {
+        "pregunta": "How do I render HTML pages using Jinja2Templates?",
+        "esperado": "advanced/templates",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I make sure a numeric URL parameter is greater than zero?",
+        "esperado": "tutorial/path-params-numeric-validations",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.3333333333333333,
+        "mrr": 1.0,
+        "ndcg": 0.46927872602275644
+      },
+      {
+        "pregunta": "How do I let a frontend served from another domain call my API in the browser?",
+        "esperado": "tutorial/cors",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.5,
+        "mrr": 0.25,
+        "ndcg": 0.2640681225725909
+      },
+      {
+        "pregunta": "How do I use StreamingResponse with yield to send data to the client in chunks?",
+        "esperado": "advanced/stream-data",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.6666666666666666,
+        "mrr": 0.5,
+        "ndcg": 0.5307212739772434
+      },
+      {
+        "pregunta": "How do I mount a Flask application inside FastAPI using WSGIMiddleware?",
+        "esperado": "advanced/wsgi",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I declare a Query parameter with max_length using Annotated?",
+        "esperado": "tutorial/query-params-str-validations",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8687949224876582
+      },
+      {
+        "pregunta": "How do I use jsonable_encoder to convert a Pydantic model into JSON compatible data?",
+        "esperado": "tutorial/encoder",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I enable TrustedHostMiddleware and HTTPSRedirectMiddleware?",
+        "esperado": "advanced/middleware",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I make my app read its configuration from environment variables?",
+        "esperado": "advanced/settings",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8687949224876582
+      },
+      {
+        "pregunta": "How can an endpoint change the HTTP status code of its response at runtime?",
+        "esperado": "advanced/response-change-status-code",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I set a cookie on the response that goes back to the client?",
+        "esperado": "advanced/response-cookies",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I add custom headers to the response of my endpoint?",
+        "esperado": "advanced/response-headers",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 0.5,
+        "ndcg": 0.6309297535714575
+      },
+      {
+        "pregunta": "How can the server push events to the browser over a single long-lived HTTP connection?",
+        "esperado": "tutorial/server-sent-events",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9197207891481876
+      },
+      {
+        "pregunta": "How do I swap a dependency for a fake one while running my test suite?",
+        "esperado": "advanced/testing-dependencies",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I limit the maximum size of the request body my API accepts?",
+        "esperado": "advanced/request-body-limits",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I organize a large application into several files and routers?",
+        "esperado": "tutorial/bigger-applications",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8539316501572937
+      },
+      {
+        "pregunta": "How do I update only some fields of a stored item instead of replacing all of it?",
+        "esperado": "tutorial/body-updates",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I give my generated API documentation a title, description and version?",
+        "esperado": "tutorial/metadata",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.6666666666666666,
+        "mrr": 1.0,
+        "ndcg": 0.7653606369886217
+      },
+      {
+        "pregunta": "How do I make my app work correctly behind a reverse proxy that strips a path prefix?",
+        "esperado": "advanced/behind-a-proxy",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 1.0,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I return a raw response without FastAPI validating or serializing it?",
+        "esperado": "advanced/response-directly",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I generate a client library for my API in TypeScript?",
+        "esperado": "advanced/generate-clients",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8687949224876582
+      },
+      {
+        "pregunta": "How do I document requests that my API will send to other services when something happens?",
+        "esperado": "advanced/openapi-webhooks",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.5,
+        "mrr": 0.25,
+        "ndcg": 0.2640681225725909
+      },
+      {
+        "pregunta": "How do I control which fields are returned to the client so a password is never exposed?",
+        "esperado": "tutorial/response-model",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.2,
+        "mrr": 1.0,
+        "ndcg": 0.3391602052736161
+      },
+      {
+        "pregunta": "What is the difference between async def and plain def for my endpoints and when should I use each?",
+        "esperado": "async",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8539316501572937
+      },
+      {
+        "pregunta": "How can I run my application inside a debugger from my editor?",
+        "esperado": "tutorial/debugging",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I receive a single plain value in the body next to a model?",
+        "esperado": "tutorial/body-multiple-params",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.5,
+        "mrr": 1.0,
+        "ndcg": 0.6131471927654584
+      },
+      {
+        "pregunta": "How do I make the API reject unexpected extra query parameters?",
+        "esperado": "tutorial/query-param-models",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.5,
+        "mrr": 1.0,
+        "ndcg": 0.6131471927654584
+      },
+      {
+        "pregunta": "How do I make the API reject unexpected extra cookies?",
+        "esperado": "tutorial/cookie-param-models",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.8772153153380493
+      },
+      {
+        "pregunta": "How can I stop underscores in header names from being converted to hyphens when using a model?",
+        "esperado": "tutorial/header-param-models",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I show an example payload in the interactive documentation?",
+        "esperado": "tutorial/schema-extra-example",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 0.5,
+        "ndcg": 0.6608397947263839
+      },
+      {
+        "pregunta": "How do I receive an uploaded file and a regular form field in the same request?",
+        "esperado": "tutorial/request-forms-and-files",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I list other possible responses such as 404 in the OpenAPI docs of an endpoint?",
+        "esperado": "advanced/additional-responses",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.6666666666666666,
+        "mrr": 1.0,
+        "ndcg": 0.6508205185601091
+      }
+    ],
+    "Híbrido 0.5/0.5": [
+      {
+        "pregunta": "How do I run a function in the background after returning a response using BackgroundTasks?",
+        "esperado": "tutorial/background-tasks",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I enable CORSMiddleware and configure allow_origins?",
+        "esperado": "tutorial/cors",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9197207891481876
+      },
+      {
+        "pregunta": "How do I receive an uploaded file with UploadFile?",
+        "esperado": "tutorial/request-files",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I return an HTTP error to the client by raising HTTPException with a status code?",
+        "esperado": "tutorial/handling-errors",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 0.75,
+        "mrr": 1.0,
+        "ndcg": 0.75369761125927
+      },
+      {
+        "pregunta": "How can I serve static files such as images or CSS from a directory with StaticFiles?",
+        "esperado": "tutorial/static-files",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "What exception do I catch to detect that a WebSocketDisconnect happened?",
+        "esperado": "advanced/websockets",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.3333333333333333,
+        "mrr": 1.0,
+        "ndcg": 0.46927872602275644
+      },
+      {
+        "pregunta": "How do I add code that runs before and after each request with @app.middleware?",
+        "esperado": "tutorial/middleware",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I declare an HttpUrl field inside a nested Pydantic model?",
+        "esperado": "tutorial/body-nested-models",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9060254355346823
+      },
+      {
+        "pregunta": "How do I receive HTML form fields with Form instead of JSON?",
+        "esperado": "tutorial/request-forms",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I use ORJSONResponse to return faster JSON responses?",
+        "esperado": "advanced/custom-response",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.2,
+        "mrr": 0.25,
+        "ndcg": 0.14606834984270645
+      },
+      {
+        "pregunta": "How do I write tests for my app using TestClient?",
+        "esperado": "tutorial/testing",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.5,
+        "mrr": 1.0,
+        "ndcg": 0.5855700749881525
+      },
+      {
+        "pregunta": "How do I restrict a path parameter to predefined values using an Enum?",
+        "esperado": "tutorial/path-params",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.2,
+        "mrr": 1.0,
+        "ndcg": 0.3391602052736161
+      },
+      {
+        "pregunta": "Why does convert_underscores matter when reading a header parameter?",
+        "esperado": "tutorial/header-params",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I read a Cookie parameter in a path operation?",
+        "esperado": "tutorial/cookie-params",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 0.2,
+        "ndcg": 0.38685280723454163
+      },
+      {
+        "pregunta": "How do I run startup and shutdown logic with the lifespan parameter?",
+        "esperado": "advanced/events",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 1.0,
+        "mrr": 0.5,
+        "ndcg": 0.7328286204777911
+      },
+      {
+        "pregunta": "How do I define SQLModel tables and connect to a SQL database?",
+        "esperado": "tutorial/sql-databases",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 1.0,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I render HTML pages using Jinja2Templates?",
+        "esperado": "advanced/templates",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I make sure a numeric URL parameter is greater than zero?",
+        "esperado": "tutorial/path-params-numeric-validations",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.6666666666666666,
+        "mrr": 1.0,
+        "ndcg": 0.7653606369886217
+      },
+      {
+        "pregunta": "How do I let a frontend served from another domain call my API in the browser?",
+        "esperado": "tutorial/cors",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.5,
+        "mrr": 1.0,
+        "ndcg": 0.6131471927654584
+      },
+      {
+        "pregunta": "How do I use StreamingResponse with yield to send data to the client in chunks?",
+        "esperado": "advanced/stream-data",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.6666666666666666,
+        "mrr": 1.0,
+        "ndcg": 0.6713860725233041
+      },
+      {
+        "pregunta": "How do I mount a Flask application inside FastAPI using WSGIMiddleware?",
+        "esperado": "advanced/wsgi",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I declare a Query parameter with max_length using Annotated?",
+        "esperado": "tutorial/query-params-str-validations",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8687949224876582
+      },
+      {
+        "pregunta": "How do I use jsonable_encoder to convert a Pydantic model into JSON compatible data?",
+        "esperado": "tutorial/encoder",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I enable TrustedHostMiddleware and HTTPSRedirectMiddleware?",
+        "esperado": "advanced/middleware",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I make my app read its configuration from environment variables?",
+        "esperado": "advanced/settings",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 0.6,
+        "mrr": 1.0,
+        "ndcg": 0.7227265726449519
+      },
+      {
+        "pregunta": "How can an endpoint change the HTTP status code of its response at runtime?",
+        "esperado": "advanced/response-change-status-code",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I set a cookie on the response that goes back to the client?",
+        "esperado": "advanced/response-cookies",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I add custom headers to the response of my endpoint?",
+        "esperado": "advanced/response-headers",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 0.5,
+        "ndcg": 0.6309297535714575
+      },
+      {
+        "pregunta": "How can the server push events to the browser over a single long-lived HTTP connection?",
+        "esperado": "tutorial/server-sent-events",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I swap a dependency for a fake one while running my test suite?",
+        "esperado": "advanced/testing-dependencies",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I limit the maximum size of the request body my API accepts?",
+        "esperado": "advanced/request-body-limits",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I organize a large application into several files and routers?",
+        "esperado": "tutorial/bigger-applications",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.830419897363192
+      },
+      {
+        "pregunta": "How do I update only some fields of a stored item instead of replacing all of it?",
+        "esperado": "tutorial/body-updates",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9060254355346823
+      },
+      {
+        "pregunta": "How do I give my generated API documentation a title, description and version?",
+        "esperado": "tutorial/metadata",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.6666666666666666,
+        "mrr": 1.0,
+        "ndcg": 0.6508205185601091
+      },
+      {
+        "pregunta": "How do I make my app work correctly behind a reverse proxy that strips a path prefix?",
+        "esperado": "advanced/behind-a-proxy",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8539316501572937
+      },
+      {
+        "pregunta": "How can I return a raw response without FastAPI validating or serializing it?",
+        "esperado": "advanced/response-directly",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I generate a client library for my API in TypeScript?",
+        "esperado": "advanced/generate-clients",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8687949224876582
+      },
+      {
+        "pregunta": "How do I document requests that my API will send to other services when something happens?",
+        "esperado": "advanced/openapi-webhooks",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.5,
+        "mrr": 0.25,
+        "ndcg": 0.2640681225725909
+      },
+      {
+        "pregunta": "How do I control which fields are returned to the client so a password is never exposed?",
+        "esperado": "tutorial/response-model",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.2,
+        "mrr": 1.0,
+        "ndcg": 0.3391602052736161
+      },
+      {
+        "pregunta": "What is the difference between async def and plain def for my endpoints and when should I use each?",
+        "esperado": "async",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8687949224876582
+      },
+      {
+        "pregunta": "How can I run my application inside a debugger from my editor?",
+        "esperado": "tutorial/debugging",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I receive a single plain value in the body next to a model?",
+        "esperado": "tutorial/body-multiple-params",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.5,
+        "mrr": 1.0,
+        "ndcg": 0.6131471927654584
+      },
+      {
+        "pregunta": "How do I make the API reject unexpected extra query parameters?",
+        "esperado": "tutorial/query-param-models",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.8772153153380493
+      },
+      {
+        "pregunta": "How do I make the API reject unexpected extra cookies?",
+        "esperado": "tutorial/cookie-param-models",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.8772153153380493
+      },
+      {
+        "pregunta": "How can I stop underscores in header names from being converted to hyphens when using a model?",
+        "esperado": "tutorial/header-param-models",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.8772153153380493
+      },
+      {
+        "pregunta": "How do I show an example payload in the interactive documentation?",
+        "esperado": "tutorial/schema-extra-example",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.2,
+        "mrr": 0.2,
+        "ndcg": 0.13120507751234178
+      },
+      {
+        "pregunta": "How do I receive an uploaded file and a regular form field in the same request?",
+        "esperado": "tutorial/request-forms-and-files",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I list other possible responses such as 404 in the OpenAPI docs of an endpoint?",
+        "esperado": "advanced/additional-responses",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.3333333333333333,
+        "mrr": 0.5,
+        "ndcg": 0.2960819109658652
+      }
+    ],
+    "Híbrido 0.5/0.5 + rerank": [
+      {
+        "pregunta": "How do I run a function in the background after returning a response using BackgroundTasks?",
+        "esperado": "tutorial/background-tasks",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I enable CORSMiddleware and configure allow_origins?",
+        "esperado": "tutorial/cors",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.8772153153380493
+      },
+      {
+        "pregunta": "How do I receive an uploaded file with UploadFile?",
+        "esperado": "tutorial/request-files",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9828920819566879
+      },
+      {
+        "pregunta": "How do I return an HTTP error to the client by raising HTTPException with a status code?",
+        "esperado": "tutorial/handling-errors",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 0.75,
+        "mrr": 1.0,
+        "ndcg": 0.787702056960637
+      },
+      {
+        "pregunta": "How can I serve static files such as images or CSS from a directory with StaticFiles?",
+        "esperado": "tutorial/static-files",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "What exception do I catch to detect that a WebSocketDisconnect happened?",
+        "esperado": "advanced/websockets",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.6666666666666666,
+        "mrr": 1.0,
+        "ndcg": 0.7039180890341347
+      },
+      {
+        "pregunta": "How do I add code that runs before and after each request with @app.middleware?",
+        "esperado": "tutorial/middleware",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I declare an HttpUrl field inside a nested Pydantic model?",
+        "esperado": "tutorial/body-nested-models",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.3333333333333333,
+        "mrr": 1.0,
+        "ndcg": 0.46927872602275644
+      },
+      {
+        "pregunta": "How do I receive HTML form fields with Form instead of JSON?",
+        "esperado": "tutorial/request-forms",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I use ORJSONResponse to return faster JSON responses?",
+        "esperado": "advanced/custom-response",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.4,
+        "mrr": 1.0,
+        "ndcg": 0.5087403079104241
+      },
+      {
+        "pregunta": "How do I write tests for my app using TestClient?",
+        "esperado": "tutorial/testing",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.5,
+        "mrr": 0.5,
+        "ndcg": 0.44149241373678083
+      },
+      {
+        "pregunta": "How do I restrict a path parameter to predefined values using an Enum?",
+        "esperado": "tutorial/path-params",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.2,
+        "mrr": 1.0,
+        "ndcg": 0.3391602052736161
+      },
+      {
+        "pregunta": "Why does convert_underscores matter when reading a header parameter?",
+        "esperado": "tutorial/header-params",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I read a Cookie parameter in a path operation?",
+        "esperado": "tutorial/cookie-params",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I run startup and shutdown logic with the lifespan parameter?",
+        "esperado": "advanced/events",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9674679834891693
+      },
+      {
+        "pregunta": "How do I define SQLModel tables and connect to a SQL database?",
+        "esperado": "tutorial/sql-databases",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 1.0,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I render HTML pages using Jinja2Templates?",
+        "esperado": "advanced/templates",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I make sure a numeric URL parameter is greater than zero?",
+        "esperado": "tutorial/path-params-numeric-validations",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.6666666666666666,
+        "mrr": 1.0,
+        "ndcg": 0.6713860725233041
+      },
+      {
+        "pregunta": "How do I let a frontend served from another domain call my API in the browser?",
+        "esperado": "tutorial/cors",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.5,
+        "mrr": 1.0,
+        "ndcg": 0.6131471927654584
+      },
+      {
+        "pregunta": "How do I use StreamingResponse with yield to send data to the client in chunks?",
+        "esperado": "advanced/stream-data",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.6666666666666666,
+        "mrr": 1.0,
+        "ndcg": 0.6508205185601091
+      },
+      {
+        "pregunta": "How do I mount a Flask application inside FastAPI using WSGIMiddleware?",
+        "esperado": "advanced/wsgi",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I declare a Query parameter with max_length using Annotated?",
+        "esperado": "tutorial/query-params-str-validations",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8687949224876582
+      },
+      {
+        "pregunta": "How do I use jsonable_encoder to convert a Pydantic model into JSON compatible data?",
+        "esperado": "tutorial/encoder",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I enable TrustedHostMiddleware and HTTPSRedirectMiddleware?",
+        "esperado": "advanced/middleware",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I make my app read its configuration from environment variables?",
+        "esperado": "advanced/settings",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8687949224876582
+      },
+      {
+        "pregunta": "How can an endpoint change the HTTP status code of its response at runtime?",
+        "esperado": "advanced/response-change-status-code",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I set a cookie on the response that goes back to the client?",
+        "esperado": "advanced/response-cookies",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I add custom headers to the response of my endpoint?",
+        "esperado": "advanced/response-headers",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can the server push events to the browser over a single long-lived HTTP connection?",
+        "esperado": "tutorial/server-sent-events",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I swap a dependency for a fake one while running my test suite?",
+        "esperado": "advanced/testing-dependencies",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I limit the maximum size of the request body my API accepts?",
+        "esperado": "advanced/request-body-limits",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I organize a large application into several files and routers?",
+        "esperado": "tutorial/bigger-applications",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.830419897363192
+      },
+      {
+        "pregunta": "How do I update only some fields of a stored item instead of replacing all of it?",
+        "esperado": "tutorial/body-updates",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I give my generated API documentation a title, description and version?",
+        "esperado": "tutorial/metadata",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9060254355346823
+      },
+      {
+        "pregunta": "How do I make my app work correctly behind a reverse proxy that strips a path prefix?",
+        "esperado": "advanced/behind-a-proxy",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.7860137352654724
+      },
+      {
+        "pregunta": "How can I return a raw response without FastAPI validating or serializing it?",
+        "esperado": "advanced/response-directly",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I generate a client library for my API in TypeScript?",
+        "esperado": "advanced/generate-clients",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8687949224876582
+      },
+      {
+        "pregunta": "How do I document requests that my API will send to other services when something happens?",
+        "esperado": "advanced/openapi-webhooks",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.5,
+        "mrr": 0.5,
+        "ndcg": 0.38685280723454163
+      },
+      {
+        "pregunta": "How do I control which fields are returned to the client so a password is never exposed?",
+        "esperado": "tutorial/response-model",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.2,
+        "mrr": 0.25,
+        "ndcg": 0.14606834984270645
+      },
+      {
+        "pregunta": "What is the difference between async def and plain def for my endpoints and when should I use each?",
+        "esperado": "async",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8687949224876582
+      },
+      {
+        "pregunta": "How can I run my application inside a debugger from my editor?",
+        "esperado": "tutorial/debugging",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I receive a single plain value in the body next to a model?",
+        "esperado": "tutorial/body-multiple-params",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.5,
+        "mrr": 1.0,
+        "ndcg": 0.6131471927654584
+      },
+      {
+        "pregunta": "How do I make the API reject unexpected extra query parameters?",
+        "esperado": "tutorial/query-param-models",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9197207891481876
+      },
+      {
+        "pregunta": "How do I make the API reject unexpected extra cookies?",
+        "esperado": "tutorial/cookie-param-models",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.8772153153380493
+      },
+      {
+        "pregunta": "How can I stop underscores in header names from being converted to hyphens when using a model?",
+        "esperado": "tutorial/header-param-models",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9197207891481876
+      },
+      {
+        "pregunta": "How do I show an example payload in the interactive documentation?",
+        "esperado": "tutorial/schema-extra-example",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 0.0,
+        "precision": 0.0,
+        "norm_precision": 0.0,
+        "mrr": 0.0,
+        "ndcg": 0.0
+      },
+      {
+        "pregunta": "How do I receive an uploaded file and a regular form field in the same request?",
+        "esperado": "tutorial/request-forms-and-files",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I list other possible responses such as 404 in the OpenAPI docs of an endpoint?",
+        "esperado": "advanced/additional-responses",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.6666666666666666,
+        "mrr": 1.0,
+        "ndcg": 0.7653606369886217
+      }
+    ],
+    "Solo vectorial + rerank": [
+      {
+        "pregunta": "How do I run a function in the background after returning a response using BackgroundTasks?",
+        "esperado": "tutorial/background-tasks",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I enable CORSMiddleware and configure allow_origins?",
+        "esperado": "tutorial/cors",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.8772153153380493
+      },
+      {
+        "pregunta": "How do I receive an uploaded file with UploadFile?",
+        "esperado": "tutorial/request-files",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9828920819566879
+      },
+      {
+        "pregunta": "How do I return an HTTP error to the client by raising HTTPException with a status code?",
+        "esperado": "tutorial/handling-errors",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 0.75,
+        "mrr": 1.0,
+        "ndcg": 0.787702056960637
+      },
+      {
+        "pregunta": "How can I serve static files such as images or CSS from a directory with StaticFiles?",
+        "esperado": "tutorial/static-files",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "What exception do I catch to detect that a WebSocketDisconnect happened?",
+        "esperado": "advanced/websockets",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9469024295259745
+      },
+      {
+        "pregunta": "How do I add code that runs before and after each request with @app.middleware?",
+        "esperado": "tutorial/middleware",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I declare an HttpUrl field inside a nested Pydantic model?",
+        "esperado": "tutorial/body-nested-models",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.3333333333333333,
+        "mrr": 1.0,
+        "ndcg": 0.46927872602275644
+      },
+      {
+        "pregunta": "How do I receive HTML form fields with Form instead of JSON?",
+        "esperado": "tutorial/request-forms",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I use ORJSONResponse to return faster JSON responses?",
+        "esperado": "advanced/custom-response",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.4,
+        "mrr": 1.0,
+        "ndcg": 0.5087403079104241
+      },
+      {
+        "pregunta": "How do I write tests for my app using TestClient?",
+        "esperado": "tutorial/testing",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.5,
+        "mrr": 0.5,
+        "ndcg": 0.44149241373678083
+      },
+      {
+        "pregunta": "How do I restrict a path parameter to predefined values using an Enum?",
+        "esperado": "tutorial/path-params",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.2,
+        "mrr": 1.0,
+        "ndcg": 0.3391602052736161
+      },
+      {
+        "pregunta": "Why does convert_underscores matter when reading a header parameter?",
+        "esperado": "tutorial/header-params",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I read a Cookie parameter in a path operation?",
+        "esperado": "tutorial/cookie-params",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I run startup and shutdown logic with the lifespan parameter?",
+        "esperado": "advanced/events",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9674679834891693
+      },
+      {
+        "pregunta": "How do I define SQLModel tables and connect to a SQL database?",
+        "esperado": "tutorial/sql-databases",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 1.0,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I render HTML pages using Jinja2Templates?",
+        "esperado": "advanced/templates",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I make sure a numeric URL parameter is greater than zero?",
+        "esperado": "tutorial/path-params-numeric-validations",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.3333333333333333,
+        "mrr": 1.0,
+        "ndcg": 0.46927872602275644
+      },
+      {
+        "pregunta": "How do I let a frontend served from another domain call my API in the browser?",
+        "esperado": "tutorial/cors",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.5,
+        "mrr": 1.0,
+        "ndcg": 0.6131471927654584
+      },
+      {
+        "pregunta": "How do I use StreamingResponse with yield to send data to the client in chunks?",
+        "esperado": "advanced/stream-data",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.6666666666666666,
+        "mrr": 1.0,
+        "ndcg": 0.6508205185601091
+      },
+      {
+        "pregunta": "How do I mount a Flask application inside FastAPI using WSGIMiddleware?",
+        "esperado": "advanced/wsgi",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I declare a Query parameter with max_length using Annotated?",
+        "esperado": "tutorial/query-params-str-validations",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8687949224876582
+      },
+      {
+        "pregunta": "How do I use jsonable_encoder to convert a Pydantic model into JSON compatible data?",
+        "esperado": "tutorial/encoder",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I enable TrustedHostMiddleware and HTTPSRedirectMiddleware?",
+        "esperado": "advanced/middleware",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I make my app read its configuration from environment variables?",
+        "esperado": "advanced/settings",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8687949224876582
+      },
+      {
+        "pregunta": "How can an endpoint change the HTTP status code of its response at runtime?",
+        "esperado": "advanced/response-change-status-code",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I set a cookie on the response that goes back to the client?",
+        "esperado": "advanced/response-cookies",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I add custom headers to the response of my endpoint?",
+        "esperado": "advanced/response-headers",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can the server push events to the browser over a single long-lived HTTP connection?",
+        "esperado": "tutorial/server-sent-events",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I swap a dependency for a fake one while running my test suite?",
+        "esperado": "advanced/testing-dependencies",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I limit the maximum size of the request body my API accepts?",
+        "esperado": "advanced/request-body-limits",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I organize a large application into several files and routers?",
+        "esperado": "tutorial/bigger-applications",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.7860137352654724
+      },
+      {
+        "pregunta": "How do I update only some fields of a stored item instead of replacing all of it?",
+        "esperado": "tutorial/body-updates",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I give my generated API documentation a title, description and version?",
+        "esperado": "tutorial/metadata",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I make my app work correctly behind a reverse proxy that strips a path prefix?",
+        "esperado": "advanced/behind-a-proxy",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.7860137352654724
+      },
+      {
+        "pregunta": "How can I return a raw response without FastAPI validating or serializing it?",
+        "esperado": "advanced/response-directly",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I generate a client library for my API in TypeScript?",
+        "esperado": "advanced/generate-clients",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8687949224876582
+      },
+      {
+        "pregunta": "How do I document requests that my API will send to other services when something happens?",
+        "esperado": "advanced/openapi-webhooks",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.5,
+        "mrr": 0.5,
+        "ndcg": 0.38685280723454163
+      },
+      {
+        "pregunta": "How do I control which fields are returned to the client so a password is never exposed?",
+        "esperado": "tutorial/response-model",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.2,
+        "mrr": 0.3333333333333333,
+        "ndcg": 0.16958010263680806
+      },
+      {
+        "pregunta": "What is the difference between async def and plain def for my endpoints and when should I use each?",
+        "esperado": "async",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8687949224876582
+      },
+      {
+        "pregunta": "How can I run my application inside a debugger from my editor?",
+        "esperado": "tutorial/debugging",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I receive a single plain value in the body next to a model?",
+        "esperado": "tutorial/body-multiple-params",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.5,
+        "mrr": 1.0,
+        "ndcg": 0.6131471927654584
+      },
+      {
+        "pregunta": "How do I make the API reject unexpected extra query parameters?",
+        "esperado": "tutorial/query-param-models",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9197207891481876
+      },
+      {
+        "pregunta": "How do I make the API reject unexpected extra cookies?",
+        "esperado": "tutorial/cookie-param-models",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9197207891481876
+      },
+      {
+        "pregunta": "How can I stop underscores in header names from being converted to hyphens when using a model?",
+        "esperado": "tutorial/header-param-models",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9197207891481876
+      },
+      {
+        "pregunta": "How do I show an example payload in the interactive documentation?",
+        "esperado": "tutorial/schema-extra-example",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.4,
+        "mrr": 0.25,
+        "ndcg": 0.27727342735504823
+      },
+      {
+        "pregunta": "How do I receive an uploaded file and a regular form field in the same request?",
+        "esperado": "tutorial/request-forms-and-files",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I list other possible responses such as 404 in the OpenAPI docs of an endpoint?",
+        "esperado": "advanced/additional-responses",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.6666666666666666,
+        "mrr": 1.0,
+        "ndcg": 0.7653606369886217
+      }
+    ],
+    "Híbrido 0.5/0.5 + filtro categoría*": [
+      {
+        "pregunta": "How do I run a function in the background after returning a response using BackgroundTasks?",
+        "esperado": "tutorial/background-tasks",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I enable CORSMiddleware and configure allow_origins?",
+        "esperado": "tutorial/cors",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.8772153153380493
+      },
+      {
+        "pregunta": "How do I receive an uploaded file with UploadFile?",
+        "esperado": "tutorial/request-files",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I return an HTTP error to the client by raising HTTPException with a status code?",
+        "esperado": "tutorial/handling-errors",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 0.75,
+        "mrr": 1.0,
+        "ndcg": 0.75369761125927
+      },
+      {
+        "pregunta": "How can I serve static files such as images or CSS from a directory with StaticFiles?",
+        "esperado": "tutorial/static-files",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "What exception do I catch to detect that a WebSocketDisconnect happened?",
+        "esperado": "advanced/websockets",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.6666666666666666,
+        "mrr": 1.0,
+        "ndcg": 0.6508205185601091
+      },
+      {
+        "pregunta": "How do I add code that runs before and after each request with @app.middleware?",
+        "esperado": "tutorial/middleware",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I declare an HttpUrl field inside a nested Pydantic model?",
+        "esperado": "tutorial/body-nested-models",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9674679834891693
+      },
+      {
+        "pregunta": "How do I receive HTML form fields with Form instead of JSON?",
+        "esperado": "tutorial/request-forms",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I use ORJSONResponse to return faster JSON responses?",
+        "esperado": "advanced/custom-response",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 0.6,
+        "mrr": 0.3333333333333333,
+        "ndcg": 0.4468535299918563
+      },
+      {
+        "pregunta": "How do I write tests for my app using TestClient?",
+        "esperado": "tutorial/testing",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 0.75,
+        "mrr": 1.0,
+        "ndcg": 0.8318724637288826
+      },
+      {
+        "pregunta": "How do I restrict a path parameter to predefined values using an Enum?",
+        "esperado": "tutorial/path-params",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.4,
+        "mrr": 1.0,
+        "ndcg": 0.5087403079104241
+      },
+      {
+        "pregunta": "Why does convert_underscores matter when reading a header parameter?",
+        "esperado": "tutorial/header-params",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I read a Cookie parameter in a path operation?",
+        "esperado": "tutorial/cookie-params",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 0.25,
+        "ndcg": 0.43067655807339306
+      },
+      {
+        "pregunta": "How do I run startup and shutdown logic with the lifespan parameter?",
+        "esperado": "advanced/events",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9060254355346823
+      },
+      {
+        "pregunta": "How do I define SQLModel tables and connect to a SQL database?",
+        "esperado": "tutorial/sql-databases",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 1.0,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I render HTML pages using Jinja2Templates?",
+        "esperado": "advanced/templates",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I make sure a numeric URL parameter is greater than zero?",
+        "esperado": "tutorial/path-params-numeric-validations",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.6666666666666666,
+        "mrr": 1.0,
+        "ndcg": 0.7039180890341347
+      },
+      {
+        "pregunta": "How do I let a frontend served from another domain call my API in the browser?",
+        "esperado": "tutorial/cors",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.5,
+        "mrr": 0.5,
+        "ndcg": 0.38685280723454163
+      },
+      {
+        "pregunta": "How do I use StreamingResponse with yield to send data to the client in chunks?",
+        "esperado": "advanced/stream-data",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.6666666666666666,
+        "mrr": 1.0,
+        "ndcg": 0.6713860725233041
+      },
+      {
+        "pregunta": "How do I mount a Flask application inside FastAPI using WSGIMiddleware?",
+        "esperado": "advanced/wsgi",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I declare a Query parameter with max_length using Annotated?",
+        "esperado": "tutorial/query-params-str-validations",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8539316501572937
+      },
+      {
+        "pregunta": "How do I use jsonable_encoder to convert a Pydantic model into JSON compatible data?",
+        "esperado": "tutorial/encoder",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I enable TrustedHostMiddleware and HTTPSRedirectMiddleware?",
+        "esperado": "advanced/middleware",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I make my app read its configuration from environment variables?",
+        "esperado": "advanced/settings",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 0.6,
+        "mrr": 1.0,
+        "ndcg": 0.7227265726449519
+      },
+      {
+        "pregunta": "How can an endpoint change the HTTP status code of its response at runtime?",
+        "esperado": "advanced/response-change-status-code",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I set a cookie on the response that goes back to the client?",
+        "esperado": "advanced/response-cookies",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I add custom headers to the response of my endpoint?",
+        "esperado": "advanced/response-headers",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can the server push events to the browser over a single long-lived HTTP connection?",
+        "esperado": "tutorial/server-sent-events",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I swap a dependency for a fake one while running my test suite?",
+        "esperado": "advanced/testing-dependencies",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I limit the maximum size of the request body my API accepts?",
+        "esperado": "advanced/request-body-limits",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I organize a large application into several files and routers?",
+        "esperado": "tutorial/bigger-applications",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8539316501572937
+      },
+      {
+        "pregunta": "How do I update only some fields of a stored item instead of replacing all of it?",
+        "esperado": "tutorial/body-updates",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9060254355346823
+      },
+      {
+        "pregunta": "How do I give my generated API documentation a title, description and version?",
+        "esperado": "tutorial/metadata",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.6666666666666666,
+        "mrr": 1.0,
+        "ndcg": 0.6713860725233041
+      },
+      {
+        "pregunta": "How do I make my app work correctly behind a reverse proxy that strips a path prefix?",
+        "esperado": "advanced/behind-a-proxy",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8539316501572937
+      },
+      {
+        "pregunta": "How can I return a raw response without FastAPI validating or serializing it?",
+        "esperado": "advanced/response-directly",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I generate a client library for my API in TypeScript?",
+        "esperado": "advanced/generate-clients",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8687949224876582
+      },
+      {
+        "pregunta": "How do I document requests that my API will send to other services when something happens?",
+        "esperado": "advanced/openapi-webhooks",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.5,
+        "mrr": 0.25,
+        "ndcg": 0.2640681225725909
+      },
+      {
+        "pregunta": "How do I control which fields are returned to the client so a password is never exposed?",
+        "esperado": "tutorial/response-model",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.2,
+        "mrr": 1.0,
+        "ndcg": 0.3391602052736161
+      },
+      {
+        "pregunta": "What is the difference between async def and plain def for my endpoints and when should I use each?",
+        "esperado": "async",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 1.0,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I run my application inside a debugger from my editor?",
+        "esperado": "tutorial/debugging",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I receive a single plain value in the body next to a model?",
+        "esperado": "tutorial/body-multiple-params",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.5,
+        "mrr": 1.0,
+        "ndcg": 0.6131471927654584
+      },
+      {
+        "pregunta": "How do I make the API reject unexpected extra query parameters?",
+        "esperado": "tutorial/query-param-models",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg": 0.5706417189553201
+      },
+      {
+        "pregunta": "How do I make the API reject unexpected extra cookies?",
+        "esperado": "tutorial/cookie-param-models",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9197207891481876
+      },
+      {
+        "pregunta": "How can I stop underscores in header names from being converted to hyphens when using a model?",
+        "esperado": "tutorial/header-param-models",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.8772153153380493
+      },
+      {
+        "pregunta": "How do I show an example payload in the interactive documentation?",
+        "esperado": "tutorial/schema-extra-example",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.2,
+        "mrr": 1.0,
+        "ndcg": 0.3391602052736161
+      },
+      {
+        "pregunta": "How do I receive an uploaded file and a regular form field in the same request?",
+        "esperado": "tutorial/request-forms-and-files",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I list other possible responses such as 404 in the OpenAPI docs of an endpoint?",
+        "esperado": "advanced/additional-responses",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.6666666666666666,
+        "mrr": 1.0,
+        "ndcg": 0.7039180890341347
+      }
+    ],
+    "Solo vectorial + filtro categoría*": [
+      {
+        "pregunta": "How do I run a function in the background after returning a response using BackgroundTasks?",
+        "esperado": "tutorial/background-tasks",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I enable CORSMiddleware and configure allow_origins?",
+        "esperado": "tutorial/cors",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I receive an uploaded file with UploadFile?",
+        "esperado": "tutorial/request-files",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9828920819566879
+      },
+      {
+        "pregunta": "How do I return an HTTP error to the client by raising HTTPException with a status code?",
+        "esperado": "tutorial/handling-errors",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 0.75,
+        "mrr": 1.0,
+        "ndcg": 0.7095272044910244
+      },
+      {
+        "pregunta": "How can I serve static files such as images or CSS from a directory with StaticFiles?",
+        "esperado": "tutorial/static-files",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "What exception do I catch to detect that a WebSocketDisconnect happened?",
+        "esperado": "advanced/websockets",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9060254355346823
+      },
+      {
+        "pregunta": "How do I add code that runs before and after each request with @app.middleware?",
+        "esperado": "tutorial/middleware",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I declare an HttpUrl field inside a nested Pydantic model?",
+        "esperado": "tutorial/body-nested-models",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.3333333333333333,
+        "mrr": 1.0,
+        "ndcg": 0.46927872602275644
+      },
+      {
+        "pregunta": "How do I receive HTML form fields with Form instead of JSON?",
+        "esperado": "tutorial/request-forms",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I use ORJSONResponse to return faster JSON responses?",
+        "esperado": "advanced/custom-response",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.4,
+        "mrr": 1.0,
+        "ndcg": 0.5087403079104241
+      },
+      {
+        "pregunta": "How do I write tests for my app using TestClient?",
+        "esperado": "tutorial/testing",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I restrict a path parameter to predefined values using an Enum?",
+        "esperado": "tutorial/path-params",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.4,
+        "mrr": 1.0,
+        "ndcg": 0.48522855511632257
+      },
+      {
+        "pregunta": "Why does convert_underscores matter when reading a header parameter?",
+        "esperado": "tutorial/header-params",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I read a Cookie parameter in a path operation?",
+        "esperado": "tutorial/cookie-params",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I run startup and shutdown logic with the lifespan parameter?",
+        "esperado": "advanced/events",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 1.0,
+        "mrr": 0.5,
+        "ndcg": 0.7328286204777911
+      },
+      {
+        "pregunta": "How do I define SQLModel tables and connect to a SQL database?",
+        "esperado": "tutorial/sql-databases",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8687949224876582
+      },
+      {
+        "pregunta": "How do I render HTML pages using Jinja2Templates?",
+        "esperado": "advanced/templates",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I make sure a numeric URL parameter is greater than zero?",
+        "esperado": "tutorial/path-params-numeric-validations",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.3333333333333333,
+        "mrr": 1.0,
+        "ndcg": 0.46927872602275644
+      },
+      {
+        "pregunta": "How do I let a frontend served from another domain call my API in the browser?",
+        "esperado": "tutorial/cors",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.5,
+        "mrr": 0.25,
+        "ndcg": 0.2640681225725909
+      },
+      {
+        "pregunta": "How do I use StreamingResponse with yield to send data to the client in chunks?",
+        "esperado": "advanced/stream-data",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.6666666666666666,
+        "mrr": 0.5,
+        "ndcg": 0.5307212739772434
+      },
+      {
+        "pregunta": "How do I mount a Flask application inside FastAPI using WSGIMiddleware?",
+        "esperado": "advanced/wsgi",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I declare a Query parameter with max_length using Annotated?",
+        "esperado": "tutorial/query-params-str-validations",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8687949224876582
+      },
+      {
+        "pregunta": "How do I use jsonable_encoder to convert a Pydantic model into JSON compatible data?",
+        "esperado": "tutorial/encoder",
+        "tipo": "exacto",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I enable TrustedHostMiddleware and HTTPSRedirectMiddleware?",
+        "esperado": "advanced/middleware",
+        "tipo": "exacto",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I make my app read its configuration from environment variables?",
+        "esperado": "advanced/settings",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 1.0,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can an endpoint change the HTTP status code of its response at runtime?",
+        "esperado": "advanced/response-change-status-code",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I set a cookie on the response that goes back to the client?",
+        "esperado": "advanced/response-cookies",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I add custom headers to the response of my endpoint?",
+        "esperado": "advanced/response-headers",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can the server push events to the browser over a single long-lived HTTP connection?",
+        "esperado": "tutorial/server-sent-events",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I swap a dependency for a fake one while running my test suite?",
+        "esperado": "advanced/testing-dependencies",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I limit the maximum size of the request body my API accepts?",
+        "esperado": "advanced/request-body-limits",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I organize a large application into several files and routers?",
+        "esperado": "tutorial/bigger-applications",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8539316501572937
+      },
+      {
+        "pregunta": "How do I update only some fields of a stored item instead of replacing all of it?",
+        "esperado": "tutorial/body-updates",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I give my generated API documentation a title, description and version?",
+        "esperado": "tutorial/metadata",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.6,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9674679834891693
+      },
+      {
+        "pregunta": "How do I make my app work correctly behind a reverse proxy that strips a path prefix?",
+        "esperado": "advanced/behind-a-proxy",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 1.0,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I return a raw response without FastAPI validating or serializing it?",
+        "esperado": "advanced/response-directly",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I generate a client library for my API in TypeScript?",
+        "esperado": "advanced/generate-clients",
+        "tipo": "parafrasis",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 1.0,
+        "ndcg": 0.8687949224876582
+      },
+      {
+        "pregunta": "How do I document requests that my API will send to other services when something happens?",
+        "esperado": "advanced/openapi-webhooks",
+        "tipo": "parafrasis",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.5,
+        "mrr": 0.25,
+        "ndcg": 0.2640681225725909
+      },
+      {
+        "pregunta": "How do I control which fields are returned to the client so a password is never exposed?",
+        "esperado": "tutorial/response-model",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.2,
+        "mrr": 1.0,
+        "ndcg": 0.3391602052736161
+      },
+      {
+        "pregunta": "What is the difference between async def and plain def for my endpoints and when should I use each?",
+        "esperado": "async",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 1.0,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How can I run my application inside a debugger from my editor?",
+        "esperado": "tutorial/debugging",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I receive a single plain value in the body next to a model?",
+        "esperado": "tutorial/body-multiple-params",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.5,
+        "mrr": 1.0,
+        "ndcg": 0.6131471927654584
+      },
+      {
+        "pregunta": "How do I make the API reject unexpected extra query parameters?",
+        "esperado": "tutorial/query-param-models",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 0.5,
+        "mrr": 1.0,
+        "ndcg": 0.6131471927654584
+      },
+      {
+        "pregunta": "How do I make the API reject unexpected extra cookies?",
+        "esperado": "tutorial/cookie-param-models",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.9197207891481876
+      },
+      {
+        "pregunta": "How can I stop underscores in header names from being converted to hyphens when using a model?",
+        "esperado": "tutorial/header-param-models",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I show an example payload in the interactive documentation?",
+        "esperado": "tutorial/schema-extra-example",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.8,
+        "norm_precision": 0.8,
+        "mrr": 0.5,
+        "ndcg": 0.6608397947263839
+      },
+      {
+        "pregunta": "How do I receive an uploaded file and a regular form field in the same request?",
+        "esperado": "tutorial/request-forms-and-files",
+        "tipo": "ambigua",
+        "split": "dev",
+        "recall": 1.0,
+        "precision": 0.2,
+        "norm_precision": 1.0,
+        "mrr": 1.0,
+        "ndcg": 1.0
+      },
+      {
+        "pregunta": "How do I list other possible responses such as 404 in the OpenAPI docs of an endpoint?",
+        "esperado": "advanced/additional-responses",
+        "tipo": "ambigua",
+        "split": "test",
+        "recall": 1.0,
+        "precision": 0.4,
+        "norm_precision": 0.6666666666666666,
+        "mrr": 1.0,
+        "ndcg": 0.6713860725233041
+      }
+    ]
+  },
+  "rerank": {
+    "model": "bge-reranker-v2-m3",
+    "requests": 96,
+    "cache_hits": 0,
+    "mean_latency_ms": 670
+  },
+  "analysis": {
+    "summary": {
+      "test": {
+        "Solo BM25": {
+          "n": 24,
+          "recall": {
+            "mean": 0.8333333333333334,
+            "lo": 0.6666666666666666,
+            "hi": 0.9583333333333334
+          },
+          "precision": {
+            "mean": 0.3,
+            "lo": 0.20833333333333334,
+            "hi": 0.39166666666666666
+          },
+          "norm_precision": {
+            "mean": 0.5506944444444445,
+            "lo": 0.4138888888888889,
+            "hi": 0.6909722222222222
+          },
+          "mrr": {
+            "mean": 0.6854166666666667,
+            "lo": 0.5208333333333334,
+            "hi": 0.8333333333333334
+          },
+          "ndcg": {
+            "mean": 0.5204347719293906,
+            "lo": 0.391886871609433,
+            "hi": 0.6430026434801767
+          }
+        },
+        "Solo vectorial": {
+          "n": 24,
+          "recall": {
+            "mean": 1.0,
+            "lo": 1.0,
+            "hi": 1.0
+          },
+          "precision": {
+            "mean": 0.42500000000000004,
+            "lo": 0.34166666666666673,
+            "hi": 0.5166666666666667
+          },
+          "norm_precision": {
+            "mean": 0.7555555555555555,
+            "lo": 0.6625,
+            "hi": 0.85
+          },
+          "mrr": {
+            "mean": 0.875,
+            "lo": 0.7708333333333334,
+            "hi": 0.96875
+          },
+          "ndcg": {
+            "mean": 0.7338873570486042,
+            "lo": 0.6359752951484058,
+            "hi": 0.8277430239879887
+          }
+        },
+        "Híbrido 0.5/0.5": {
+          "n": 24,
+          "recall": {
+            "mean": 1.0,
+            "lo": 1.0,
+            "hi": 1.0
+          },
+          "precision": {
+            "mean": 0.39166666666666666,
+            "lo": 0.3,
+            "hi": 0.4916666666666667
+          },
+          "norm_precision": {
+            "mean": 0.71875,
+            "lo": 0.5944444444444444,
+            "hi": 0.8340277777777777
+          },
+          "mrr": {
+            "mean": 0.8291666666666666,
+            "lo": 0.7020833333333334,
+            "hi": 0.9458333333333333
+          },
+          "ndcg": {
+            "mean": 0.6765339509678711,
+            "lo": 0.5578583752184915,
+            "hi": 0.7905565918767133
+          }
+        },
+        "Híbrido 0.5/0.5 + rerank": {
+          "n": 24,
+          "recall": {
+            "mean": 0.9583333333333334,
+            "lo": 0.875,
+            "hi": 1.0
+          },
+          "precision": {
+            "mean": 0.39999999999999997,
+            "lo": 0.30833333333333335,
+            "hi": 0.5083333333333334
+          },
+          "norm_precision": {
+            "mean": 0.7326388888888888,
+            "lo": 0.6104166666666667,
+            "hi": 0.845138888888889
+          },
+          "mrr": {
+            "mean": 0.9375,
+            "lo": 0.8333333333333334,
+            "hi": 1.0
+          },
+          "ndcg": {
+            "mean": 0.752774730919377,
+            "lo": 0.6442040177354548,
+            "hi": 0.8534511369971677
+          }
+        },
+        "Solo vectorial + rerank": {
+          "n": 24,
+          "recall": {
+            "mean": 1.0,
+            "lo": 1.0,
+            "hi": 1.0
+          },
+          "precision": {
+            "mean": 0.42500000000000004,
+            "lo": 0.3333333333333333,
+            "hi": 0.525
+          },
+          "norm_precision": {
+            "mean": 0.7631944444444444,
+            "lo": 0.6590277777777778,
+            "hi": 0.8652777777777777
+          },
+          "mrr": {
+            "mean": 0.9479166666666666,
+            "lo": 0.8645833333333334,
+            "hi": 1.0
+          },
+          "ndcg": {
+            "mean": 0.7782885494204029,
+            "lo": 0.6814410353493616,
+            "hi": 0.8682703078260426
+          }
+        },
+        "Híbrido 0.5/0.5 + filtro categoría*": {
+          "n": 24,
+          "recall": {
+            "mean": 1.0,
+            "lo": 1.0,
+            "hi": 1.0
+          },
+          "precision": {
+            "mean": 0.44166666666666665,
+            "lo": 0.35000000000000003,
+            "hi": 0.5416666666666666
+          },
+          "norm_precision": {
+            "mean": 0.779861111111111,
+            "lo": 0.686111111111111,
+            "hi": 0.875
+          },
+          "mrr": {
+            "mean": 0.8888888888888888,
+            "lo": 0.7777777777777778,
+            "hi": 0.9791666666666666
+          },
+          "ndcg": {
+            "mean": 0.7463739365004999,
+            "lo": 0.6501739337765323,
+            "hi": 0.8405271947079975
+          }
+        },
+        "Solo vectorial + filtro categoría*": {
+          "n": 24,
+          "recall": {
+            "mean": 1.0,
+            "lo": 1.0,
+            "hi": 1.0
+          },
+          "precision": {
+            "mean": 0.45,
+            "lo": 0.35833333333333334,
+            "hi": 0.55
+          },
+          "norm_precision": {
+            "mean": 0.7881944444444445,
+            "lo": 0.6923611111111111,
+            "hi": 0.8798611111111111
+          },
+          "mrr": {
+            "mean": 0.8958333333333334,
+            "lo": 0.7916666666666666,
+            "hi": 0.9791666666666666
+          },
+          "ndcg": {
+            "mean": 0.7734058781659479,
+            "lo": 0.6682966875203963,
+            "hi": 0.8679892182488751
+          }
+        }
+      },
+      "all": {
+        "Solo BM25": {
+          "n": 48,
+          "recall": {
+            "mean": 0.8958333333333334,
+            "lo": 0.8125,
+            "hi": 0.9791666666666666
+          },
+          "precision": {
+            "mean": 0.35833333333333334,
+            "lo": 0.2916666666666667,
+            "hi": 0.42500000000000004
+          },
+          "norm_precision": {
+            "mean": 0.704513888888889,
+            "lo": 0.6055555555555555,
+            "hi": 0.8024305555555555
+          },
+          "mrr": {
+            "mean": 0.7697916666666668,
+            "lo": 0.65625,
+            "hi": 0.8677083333333333
+          },
+          "ndcg": {
+            "mean": 0.6655733017033478,
+            "lo": 0.5684189375250842,
+            "hi": 0.75438013799446
+          }
+        },
+        "Solo vectorial": {
+          "n": 48,
+          "recall": {
+            "mean": 1.0,
+            "lo": 1.0,
+            "hi": 1.0
+          },
+          "precision": {
+            "mean": 0.42083333333333334,
+            "lo": 0.36250000000000004,
+            "hi": 0.48750000000000004
+          },
+          "norm_precision": {
+            "mean": 0.8180555555555555,
+            "lo": 0.7458333333333332,
+            "hi": 0.8833333333333333
+          },
+          "mrr": {
+            "mean": 0.9270833333333334,
+            "lo": 0.8645833333333334,
+            "hi": 0.9739583333333334
+          },
+          "ndcg": {
+            "mean": 0.8114440353751297,
+            "lo": 0.7419613579003476,
+            "hi": 0.871884632429672
+          }
+        },
+        "Híbrido 0.5/0.5": {
+          "n": 48,
+          "recall": {
+            "mean": 1.0,
+            "lo": 1.0,
+            "hi": 1.0
+          },
+          "precision": {
+            "mean": 0.40416666666666673,
+            "lo": 0.3458333333333334,
+            "hi": 0.46666666666666673
+          },
+          "norm_precision": {
+            "mean": 0.8086805555555556,
+            "lo": 0.7270833333333333,
+            "hi": 0.8826388888888889
+          },
+          "mrr": {
+            "mean": 0.9041666666666667,
+            "lo": 0.8270833333333334,
+            "hi": 0.9677083333333334
+          },
+          "ndcg": {
+            "mean": 0.7867842410928702,
+            "lo": 0.7029963289918711,
+            "hi": 0.85766720029806
+          }
+        },
+        "Híbrido 0.5/0.5 + rerank": {
+          "n": 48,
+          "recall": {
+            "mean": 0.9791666666666666,
+            "lo": 0.9375,
+            "hi": 1.0
+          },
+          "precision": {
+            "mean": 0.41250000000000003,
+            "lo": 0.35000000000000003,
+            "hi": 0.4791666666666667
+          },
+          "norm_precision": {
+            "mean": 0.8197916666666667,
+            "lo": 0.7374999999999999,
+            "hi": 0.8927083333333333
+          },
+          "mrr": {
+            "mean": 0.9427083333333334,
+            "lo": 0.875,
+            "hi": 0.9895833333333334
+          },
+          "ndcg": {
+            "mean": 0.8258113667114763,
+            "lo": 0.7497728799553687,
+            "hi": 0.8935643130632082
+          }
+        },
+        "Solo vectorial + rerank": {
+          "n": 48,
+          "recall": {
+            "mean": 1.0,
+            "lo": 1.0,
+            "hi": 1.0
+          },
+          "precision": {
+            "mean": 0.42083333333333334,
+            "lo": 0.35833333333333334,
+            "hi": 0.48750000000000004
+          },
+          "norm_precision": {
+            "mean": 0.828125,
+            "lo": 0.7559027777777777,
+            "hi": 0.8986111111111111
+          },
+          "mrr": {
+            "mean": 0.9496527777777778,
+            "lo": 0.8923611111111112,
+            "hi": 0.9895833333333334
+          },
+          "ndcg": {
+            "mean": 0.8348475344264382,
+            "lo": 0.7666797098702626,
+            "hi": 0.8979411293098233
+          }
+        },
+        "Híbrido 0.5/0.5 + filtro categoría*": {
+          "n": 48,
+          "recall": {
+            "mean": 1.0,
+            "lo": 1.0,
+            "hi": 1.0
+          },
+          "precision": {
+            "mean": 0.43333333333333335,
+            "lo": 0.375,
+            "hi": 0.5
+          },
+          "norm_precision": {
+            "mean": 0.8444444444444444,
+            "lo": 0.7777777777777778,
+            "hi": 0.9052083333333334
+          },
+          "mrr": {
+            "mean": 0.9305555555555555,
+            "lo": 0.8645833333333334,
+            "hi": 0.984375
+          },
+          "ndcg": {
+            "mean": 0.8227767975979431,
+            "lo": 0.7541612239656842,
+            "hi": 0.8838571866249642
+          }
+        },
+        "Solo vectorial + filtro categoría*": {
+          "n": 48,
+          "recall": {
+            "mean": 1.0,
+            "lo": 1.0,
+            "hi": 1.0
+          },
+          "precision": {
+            "mean": 0.44583333333333336,
+            "lo": 0.37916666666666665,
+            "hi": 0.5208333333333334
+          },
+          "norm_precision": {
+            "mean": 0.8489583333333334,
+            "lo": 0.7819444444444444,
+            "hi": 0.9104166666666668
+          },
+          "mrr": {
+            "mean": 0.9375,
+            "lo": 0.8802083333333334,
+            "hi": 0.984375
+          },
+          "ndcg": {
+            "mean": 0.8451633921868066,
+            "lo": 0.7778997545680153,
+            "hi": 0.9055100803060645
+          }
+        }
+      }
+    },
+    "comparisons": [
+      {
+        "subset": "test",
+        "a": "Híbrido 0.5/0.5",
+        "b": "Solo vectorial",
+        "metric": "recall",
+        "diff": 0.0,
+        "lo": 0.0,
+        "hi": 0.0,
+        "p": 1.0
+      },
+      {
+        "subset": "test",
+        "a": "Híbrido 0.5/0.5",
+        "b": "Solo vectorial",
+        "metric": "mrr",
+        "diff": -0.04583333333333334,
+        "lo": -0.17500000000000002,
+        "hi": 0.07916666666666666,
+        "p": 0.771
+      },
+      {
+        "subset": "test",
+        "a": "Híbrido 0.5/0.5",
+        "b": "Solo vectorial",
+        "metric": "ndcg",
+        "diff": -0.05735340608073323,
+        "lo": -0.1609111155969698,
+        "hi": 0.03955813584469376,
+        "p": 0.8675
+      },
+      {
+        "subset": "test",
+        "a": "Híbrido 0.5/0.5",
+        "b": "Solo BM25",
+        "metric": "recall",
+        "diff": 0.16666666666666666,
+        "lo": 0.041666666666666664,
+        "hi": 0.3333333333333333,
+        "p": 0.013
+      },
+      {
+        "subset": "test",
+        "a": "Híbrido 0.5/0.5",
+        "b": "Solo BM25",
+        "metric": "mrr",
+        "diff": 0.14375000000000002,
+        "lo": 0.0625,
+        "hi": 0.2354166666666667,
+        "p": 0.0005
+      },
+      {
+        "subset": "test",
+        "a": "Híbrido 0.5/0.5",
+        "b": "Solo BM25",
+        "metric": "ndcg",
+        "diff": 0.15609917903848045,
+        "lo": 0.08829578373561071,
+        "hi": 0.2295745813796196,
+        "p": 0.0
+      },
+      {
+        "subset": "all",
+        "a": "Híbrido 0.5/0.5",
+        "b": "Solo vectorial",
+        "metric": "recall",
+        "diff": 0.0,
+        "lo": 0.0,
+        "hi": 0.0,
+        "p": 1.0
+      },
+      {
+        "subset": "all",
+        "a": "Híbrido 0.5/0.5",
+        "b": "Solo vectorial",
+        "metric": "mrr",
+        "diff": -0.02291666666666667,
+        "lo": -0.08541666666666665,
+        "hi": 0.040625,
+        "p": 0.761
+      },
+      {
+        "subset": "all",
+        "a": "Híbrido 0.5/0.5",
+        "b": "Solo vectorial",
+        "metric": "ndcg",
+        "diff": -0.024659794282259423,
+        "lo": -0.0799178391007306,
+        "hi": 0.029695310748693474,
+        "p": 0.808
+      },
+      {
+        "subset": "all",
+        "a": "Híbrido 0.5/0.5",
+        "b": "Solo BM25",
+        "metric": "recall",
+        "diff": 0.10416666666666667,
+        "lo": 0.020833333333333332,
+        "hi": 0.1875,
+        "p": 0.008
+      },
+      {
+        "subset": "all",
+        "a": "Híbrido 0.5/0.5",
+        "b": "Solo BM25",
+        "metric": "mrr",
+        "diff": 0.134375,
+        "lo": 0.06145833333333334,
+        "hi": 0.2125,
+        "p": 0.0
+      },
+      {
+        "subset": "all",
+        "a": "Híbrido 0.5/0.5",
+        "b": "Solo BM25",
+        "metric": "ndcg",
+        "diff": 0.12121093938952238,
+        "lo": 0.06874540864753838,
+        "hi": 0.18242358584330318,
+        "p": 0.0
+      },
+      {
+        "subset": "test",
+        "a": "Híbrido 0.5/0.5 + rerank",
+        "b": "Híbrido 0.5/0.5",
+        "metric": "recall",
+        "diff": -0.041666666666666664,
+        "lo": -0.125,
+        "hi": 0.0,
+        "p": 1.0
+      },
+      {
+        "subset": "test",
+        "a": "Híbrido 0.5/0.5 + rerank",
+        "b": "Híbrido 0.5/0.5",
+        "metric": "mrr",
+        "diff": 0.10833333333333334,
+        "lo": 0.014583333333333332,
+        "hi": 0.22083333333333333,
+        "p": 0.006
+      },
+      {
+        "subset": "test",
+        "a": "Híbrido 0.5/0.5 + rerank",
+        "b": "Híbrido 0.5/0.5",
+        "metric": "ndcg",
+        "diff": 0.07624077995150597,
+        "lo": -0.0045037861807669015,
+        "hi": 0.16176025602919888,
+        "p": 0.033
+      },
+      {
+        "subset": "test",
+        "a": "Híbrido 0.5/0.5 + rerank",
+        "b": "Solo vectorial",
+        "metric": "recall",
+        "diff": -0.041666666666666664,
+        "lo": -0.125,
+        "hi": 0.0,
+        "p": 1.0
+      },
+      {
+        "subset": "test",
+        "a": "Híbrido 0.5/0.5 + rerank",
+        "b": "Solo vectorial",
+        "metric": "mrr",
+        "diff": 0.0625,
+        "lo": -0.020833333333333332,
+        "hi": 0.16666666666666666,
+        "p": 0.1005
+      },
+      {
+        "subset": "test",
+        "a": "Híbrido 0.5/0.5 + rerank",
+        "b": "Solo vectorial",
+        "metric": "ndcg",
+        "diff": 0.018887373870772734,
+        "lo": -0.06715271205624213,
+        "hi": 0.09304483866440842,
+        "p": 0.3055
+      },
+      {
+        "subset": "test",
+        "a": "Solo vectorial + rerank",
+        "b": "Solo vectorial",
+        "metric": "recall",
+        "diff": 0.0,
+        "lo": 0.0,
+        "hi": 0.0,
+        "p": 1.0
+      },
+      {
+        "subset": "test",
+        "a": "Solo vectorial + rerank",
+        "b": "Solo vectorial",
+        "metric": "mrr",
+        "diff": 0.07291666666666667,
+        "lo": 0.0,
+        "hi": 0.16666666666666666,
+        "p": 0.032
+      },
+      {
+        "subset": "test",
+        "a": "Solo vectorial + rerank",
+        "b": "Solo vectorial",
+        "metric": "ndcg",
+        "diff": 0.04440119237179876,
+        "lo": -0.018546879157002958,
+        "hi": 0.10823514918476902,
+        "p": 0.0895
+      },
+      {
+        "subset": "test",
+        "a": "Híbrido 0.5/0.5 + rerank",
+        "b": "Solo vectorial + rerank",
+        "metric": "recall",
+        "diff": -0.041666666666666664,
+        "lo": -0.125,
+        "hi": 0.0,
+        "p": 1.0
+      },
+      {
+        "subset": "test",
+        "a": "Híbrido 0.5/0.5 + rerank",
+        "b": "Solo vectorial + rerank",
+        "metric": "mrr",
+        "diff": -0.010416666666666666,
+        "lo": -0.03125,
+        "hi": 0.0,
+        "p": 1.0
+      },
+      {
+        "subset": "test",
+        "a": "Híbrido 0.5/0.5 + rerank",
+        "b": "Solo vectorial + rerank",
+        "metric": "ndcg",
+        "diff": -0.025513818501026016,
+        "lo": -0.05882348031308925,
+        "hi": 0.0,
+        "p": 0.9775
+      },
+      {
+        "subset": "all",
+        "a": "Híbrido 0.5/0.5 + rerank",
+        "b": "Híbrido 0.5/0.5",
+        "metric": "recall",
+        "diff": -0.020833333333333332,
+        "lo": -0.0625,
+        "hi": 0.0,
+        "p": 1.0
+      },
+      {
+        "subset": "all",
+        "a": "Híbrido 0.5/0.5 + rerank",
+        "b": "Híbrido 0.5/0.5",
+        "metric": "mrr",
+        "diff": 0.03854166666666667,
+        "lo": -0.024999999999999998,
+        "hi": 0.1125,
+        "p": 0.1335
+      },
+      {
+        "subset": "all",
+        "a": "Híbrido 0.5/0.5 + rerank",
+        "b": "Híbrido 0.5/0.5",
+        "metric": "ndcg",
+        "diff": 0.03902712561860603,
+        "lo": -0.00597538184537499,
+        "hi": 0.090816176838201,
+        "p": 0.04
+      },
+      {
+        "subset": "all",
+        "a": "Híbrido 0.5/0.5 + rerank",
+        "b": "Solo vectorial",
+        "metric": "recall",
+        "diff": -0.020833333333333332,
+        "lo": -0.0625,
+        "hi": 0.0,
+        "p": 1.0
+      },
+      {
+        "subset": "all",
+        "a": "Híbrido 0.5/0.5 + rerank",
+        "b": "Solo vectorial",
+        "metric": "mrr",
+        "diff": 0.015625,
+        "lo": -0.046875,
+        "hi": 0.08333333333333333,
+        "p": 0.345
+      },
+      {
+        "subset": "all",
+        "a": "Híbrido 0.5/0.5 + rerank",
+        "b": "Solo vectorial",
+        "metric": "ndcg",
+        "diff": 0.014367331336346609,
+        "lo": -0.033647076284948625,
+        "hi": 0.060275577913005036,
+        "p": 0.2555
+      },
+      {
+        "subset": "all",
+        "a": "Solo vectorial + rerank",
+        "b": "Solo vectorial",
+        "metric": "recall",
+        "diff": 0.0,
+        "lo": 0.0,
+        "hi": 0.0,
+        "p": 1.0
+      },
+      {
+        "subset": "all",
+        "a": "Solo vectorial + rerank",
+        "b": "Solo vectorial",
+        "metric": "mrr",
+        "diff": 0.022569444444444444,
+        "lo": -0.03298611111111111,
+        "hi": 0.08506944444444443,
+        "p": 0.223
+      },
+      {
+        "subset": "all",
+        "a": "Solo vectorial + rerank",
+        "b": "Solo vectorial",
+        "metric": "ndcg",
+        "diff": 0.02340349905130866,
+        "lo": -0.01351144548589607,
+        "hi": 0.0631241542670521,
+        "p": 0.1065
+      },
+      {
+        "subset": "all",
+        "a": "Híbrido 0.5/0.5 + rerank",
+        "b": "Solo vectorial + rerank",
+        "metric": "recall",
+        "diff": -0.020833333333333332,
+        "lo": -0.0625,
+        "hi": 0.0,
+        "p": 1.0
+      },
+      {
+        "subset": "all",
+        "a": "Híbrido 0.5/0.5 + rerank",
+        "b": "Solo vectorial + rerank",
+        "metric": "mrr",
+        "diff": -0.006944444444444444,
+        "lo": -0.01909722222222222,
+        "hi": 0.0,
+        "p": 1.0
+      },
+      {
+        "subset": "all",
+        "a": "Híbrido 0.5/0.5 + rerank",
+        "b": "Solo vectorial + rerank",
+        "metric": "ndcg",
+        "diff": -0.009036167714962049,
+        "lo": -0.02794376491339429,
+        "hi": 0.007931311254312368,
+        "p": 0.8515
+      }
+    ],
+    "by_type": {
+      "ambigua": {
+        "Solo BM25": {
+          "n": 10,
+          "recall": 0.9,
+          "precision": 0.28,
+          "norm_precision": 0.5833333333333333,
+          "mrr": 0.625,
+          "ndcg": 0.5113737741871078
+        },
+        "Solo vectorial": {
+          "n": 10,
+          "recall": 1.0,
+          "precision": 0.4,
+          "norm_precision": 0.7466666666666667,
+          "mrr": 0.95,
+          "ndcg": 0.7608261869586369
+        },
+        "Híbrido 0.5/0.5": {
+          "n": 10,
+          "recall": 1.0,
+          "precision": 0.34,
+          "norm_precision": 0.7033333333333334,
+          "mrr": 0.8699999999999999,
+          "ndcg": 0.6880035255019088
+        },
+        "Híbrido 0.5/0.5 + rerank": {
+          "n": 10,
+          "recall": 0.9,
+          "precision": 0.34,
+          "norm_precision": 0.7166666666666667,
+          "mrr": 0.825,
+          "ndcg": 0.7110027995718868
+        },
+        "Solo vectorial + rerank": {
+          "n": 10,
+          "recall": 1.0,
+          "precision": 0.38,
+          "norm_precision": 0.7566666666666666,
+          "mrr": 0.8583333333333334,
+          "ndcg": 0.7453318649678157
+        }
+      },
+      "exacto": {
+        "Solo BM25": {
+          "n": 22,
+          "recall": 0.9090909090909091,
+          "precision": 0.38181818181818183,
+          "norm_precision": 0.7522727272727273,
+          "mrr": 0.8636363636363636,
+          "ndcg": 0.7518252952259137
+        },
+        "Solo vectorial": {
+          "n": 22,
+          "recall": 1.0,
+          "precision": 0.4181818181818182,
+          "norm_precision": 0.8363636363636363,
+          "mrr": 0.9545454545454546,
+          "ndcg": 0.8380047355641381
+        },
+        "Híbrido 0.5/0.5": {
+          "n": 22,
+          "recall": 1.0,
+          "precision": 0.4181818181818182,
+          "norm_precision": 0.8386363636363636,
+          "mrr": 0.9068181818181817,
+          "ndcg": 0.808153800672394
+        },
+        "Híbrido 0.5/0.5 + rerank": {
+          "n": 22,
+          "recall": 1.0,
+          "precision": 0.4181818181818182,
+          "norm_precision": 0.8325757575757575,
+          "mrr": 0.9772727272727273,
+          "ndcg": 0.8453401191259101
+        },
+        "Solo vectorial + rerank": {
+          "n": 22,
+          "recall": 1.0,
+          "precision": 0.4272727272727273,
+          "norm_precision": 0.8477272727272727,
+          "mrr": 0.9772727272727273,
+          "ndcg": 0.8563848618755393
+        }
+      },
+      "parafrasis": {
+        "Solo BM25": {
+          "n": 16,
+          "recall": 0.875,
+          "precision": 0.375,
+          "norm_precision": 0.7145833333333333,
+          "mrr": 0.73125,
+          "ndcg": 0.6433515153074698
+        },
+        "Solo vectorial": {
+          "n": 16,
+          "recall": 1.0,
+          "precision": 0.4375,
+          "norm_precision": 0.8375,
+          "mrr": 0.875,
+          "ndcg": 0.8065592278755509
+        },
+        "Híbrido 0.5/0.5": {
+          "n": 16,
+          "recall": 1.0,
+          "precision": 0.42500000000000004,
+          "norm_precision": 0.8333333333333334,
+          "mrr": 0.921875,
+          "ndcg": 0.819139043915376
+        },
+        "Híbrido 0.5/0.5 + rerank": {
+          "n": 16,
+          "recall": 1.0,
+          "precision": 0.45,
+          "norm_precision": 0.8666666666666667,
+          "mrr": 0.96875,
+          "ndcg": 0.870714686603873
+        },
+        "Solo vectorial + rerank": {
+          "n": 16,
+          "recall": 1.0,
+          "precision": 0.4375,
+          "norm_precision": 0.8458333333333333,
+          "mrr": 0.96875,
+          "ndcg": 0.8611810025955636
+        }
+      }
+    }
+  }
+}

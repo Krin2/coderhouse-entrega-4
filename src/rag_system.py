@@ -16,7 +16,7 @@ class RAGSystem(HybridRetriever):
 
     def __init__(self, settings: Settings | None = None, *, k: int | None = None, weights=(0.5, 0.5),
                  use_cache: bool = True, corpus: list[Document] | None = None, vectorstore=None,
-                 cache_queries: bool = False):
+                 cache_queries: bool = False, reranker=None):
         self.settings = settings or Settings.from_env()
         if corpus is None or vectorstore is None:
             self.settings.require_keys()
@@ -25,4 +25,4 @@ class RAGSystem(HybridRetriever):
         if vectorstore is None:
             vectorstore = get_vectorstore(self.settings)
         super().__init__(corpus, vectorstore, k=k or self.settings.top_k, weights=weights,
-                         cache_queries=cache_queries)
+                         cache_queries=cache_queries, reranker=reranker)

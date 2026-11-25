@@ -21,6 +21,7 @@ src/
 ├─ retrieval/
 │  ├─ corpus.py         PineconeCorpus: corpus BM25 desde Pinecone, con caché que se invalida sola
 │  ├─ lexical.py        BM25 + tokenizador
+│  ├─ rerank.py         PineconeReranker (opcional): caché en disco, ritmo y tope de solicitudes
 │  └─ hybrid.py         HybridRetriever (EnsembleRetriever, filtros por categoría; agnóstico de Pinecone)
 ├─ rag_system.py        RAGSystem: fachada lista para usar (Settings + Pinecone + OpenAI)
 ├─ vectorstore.py       fábrica del PineconeVectorStore
@@ -93,6 +94,7 @@ La partición `dev` (24) se usa **solo** para elegir los pesos del híbrido; el 
 python evaluate.py                         # imprime el reporte y lo guarda en reports/latest.{md,json}
 python -m src.cli evaluate --bootstrap 5000 --seed 1 --no-report
 python -m src.cli evaluate --namespace otro-ns --report-dir reports/otro   # otro namespace del mismo índice
+python -m src.cli evaluate --rerank        # añade los métodos con reranking (~100 solicitudes de API) -> reports/rerank/
 ```
 
 ### Resultados en `test` (n=24, IC 95 %)
@@ -128,6 +130,25 @@ El splitter es voraz y deja chunks diminutos cuando la sección vecina ya está 
 Los dos chunks que quedan bajo 150 tokens son documentos enteros de un solo chunk corto. Impacto medido con las mismas 48 preguntas y bootstrap pareado ([reports/ablation-chunks.md](reports/ablation-chunks.md); versión anterior en [reports/baseline/](reports/baseline/latest.md)): el híbrido no cambia (Recall 1.00 → 1.00, MRR +0.009, p=0.39), el vectorial solo mejora algo (Recall 0.98 → 1.00, MRR +0.030, p=0.04, una de ~30 comparaciones, así que sin mucho peso) y BM25 solo empeora levemente (Recall −0.02). No hay regresión del método por defecto. Solo ~38 % de los chunks cae en el rango 500-800 de la consigna: la mediana es menor porque muchas secciones de la documentación son cortas, y fusionarlas más (mínimo 300) subiría los chunks por encima de lo que conviene a la precisión.
 
 Al implementarlo apareció un defecto de LangChain: `add_start_index` devuelve -1 para el 9 % de los chunks (24 de 271, en 18 de 75 documentos), porque busca desde «inicio anterior + largo anterior − chunk_overlap» tratando el solapamiento (en tokens) como caracteres. Por eso las posiciones se calculan en `locate_chunks`. Esto también corrige un efecto latente sobre `page` en los PDF.
+### Experimento: reranking
+
+Opcional (`--rerank`): los candidatos del híbrido (hasta 20) o del vectorial (10) se reordenan con `bge-reranker-v2-m3` del servicio de inferencia de Pinecone y se devuelve el top-5. Mismas 48 preguntas y mismos candidatos que los métodos sin reranking, bootstrap pareado ([reports/rerank/latest.md](reports/rerank/latest.md)).
+
+| Método (n=48) | Recall@5 | MRR | nDCG@5 |
+|---|---|---|---|
+| Vectorial | 1.00 | 0.93 | 0.81 |
+| Vectorial + rerank | 1.00 | 0.95 | 0.83 |
+| Híbrido 0.5/0.5 | 1.00 | 0.90 | 0.79 |
+| Híbrido 0.5/0.5 + rerank | 0.98 | 0.94 | 0.83 |
+
+- **Mejora pequeña y poco concluyente.** Híbrido: MRR +0.039 (IC [−0.025, +0.113], p=0.13) y nDCG +0.039 (IC [−0.006, +0.091], p=0.04). Vectorial: MRR +0.023 (p=0.22). Solo en el subconjunto `test` el MRR del híbrido sube de forma marcada (+0.108, IC [+0.015, +0.221], p=0.006); con 36 comparaciones en el reporte, algún p bajo es esperable por azar.
+- **Cambia pocas preguntas:** de 48, mejora el orden en 6, empeora en 3 y queda igual en 39.
+- **Puede sacar del top-5 un documento correcto:** el Recall del híbrido baja de 1.00 a 0.98 (`schema-extra-example`, que estaba en la posición 5).
+- **Ayuda donde la pregunta nombra algo concreto y empeora en las ambiguas:** MRR del híbrido en `exacto` 0.91 → 0.98, `parafrasis` 0.92 → 0.97, `ambigua` 0.87 → 0.82 (solo 10 preguntas).
+- **BM25 sigue sin aportar:** el híbrido con rerank no supera al vectorial con rerank (MRR −0.007, nDCG −0.009).
+- **Costo:** una solicitud por consulta, ~670 ms de latencia media. El plan Starter de Pinecone permite 500 solicitudes al mes (`bge-reranker-v2-m3`) y 60 por minuto; una evaluación completa usa 96. Por eso el reranker guarda los resultados en `data/cache/rerank-<modelo>.jsonl` (repetir la evaluación no consume cuota), espacia las solicitudes, reintenta el límite por minuto con backoff, se detiene si se agota la cuota mensual y respeta `--max-rerank-requests` (150 por defecto).
+
+**Conclusión:** no se activa por defecto. Con este corpus aporta una mejora modesta en el orden a cambio de latencia y cuota, y no demuestra ventaja en Recall. Si se usa, conviene el vectorial con rerank, más simple que el híbrido y con el mismo resultado. Se activa con `RAGSystem(reranker=...)` y `retrieve(consulta, rerank=True)`, o con `--rerank` en la CLI.
 ### Experimento: indexar el código de los ejemplos
 
 La documentación referencia ~350 fragmentos de código (`{* ../../docs_src/... *}`). Por defecto se descartan; con `ingest --with-code` se incrustan como bloques de código (respetando `ln[a:b]` y sin repetir el mismo fragmento en un documento): 271 → 363 chunks. Se midió en un namespace aparte del mismo índice (`docs-fastapi-code`), con las mismas 48 preguntas y semillas, y bootstrap pareado ([reports/ablation-code.md](reports/ablation-code.md)):
@@ -151,7 +172,7 @@ El filtro se aplica a ambos recuperadores: BM25 se construye sobre el subcorpus 
 ## Tests
 
 ```powershell
-pytest                    # 121 tests unitarios, sin red (corpus y vectorstore falsos)
+pytest                    # 139 tests unitarios, sin red (corpus y vectorstore falsos)
 pytest -m integration   # prueba contra Pinecone/OpenAI reales (requiere .env)
 ```
 

@@ -9,6 +9,7 @@ from langchain_core.retrievers import BaseRetriever
 from pydantic import Field
 
 from src.retrieval.lexical import build_bm25
+from src.retrieval.rerank import Reranker
 
 
 class QueryCache(BaseRetriever):
@@ -27,10 +28,11 @@ class HybridRetriever:
     """No conoce Pinecone ni OpenAI: recibe el corpus y cualquier vectorstore con `as_retriever()`."""
 
     def __init__(self, corpus: list[Document], vectorstore, *, k: int = 5, weights=(0.5, 0.5),
-                 cache_queries: bool = False):
+                 cache_queries: bool = False, reranker: Reranker | None = None):
         if not corpus:
             raise RuntimeError("Corpus vacío: ejecutá primero la ingesta (`python -m src.cli ingest`).")
         self.k, self.corpus, self.vectorstore, self.cache_queries = k, corpus, vectorstore, cache_queries
+        self.reranker = reranker
         self._parts: dict[str | None, tuple] = {}
         self._ensembles: dict[str | None, EnsembleRetriever] = {}
         self.bm25, self.semantic = self._parts_for(None)
@@ -45,9 +47,19 @@ class HybridRetriever:
     def set_weights(self, weights) -> None:
         self.ensemble.weights = list(weights)
 
-    def retrieve(self, query: str, category: str | None = None) -> list[Document]:
-        """Top-k combinando resultados léxicos y semánticos; `category` restringe ambos."""
+    def retrieve(self, query: str, category: str | None = None, rerank: bool = False) -> list[Document]:
+        """Top-k combinando resultados léxicos y semánticos; `category` restringe ambos. Con `rerank` se
+        reordena el conjunto de candidatos (hasta 4k) con el reranker antes de quedarse con el top-k."""
+        if rerank:
+            return self.retrieve_reranked(query, category)
         return self._ensemble_for(category).invoke(query)[: self.k]
+
+    def retrieve_reranked(self, query: str, category: str | None = None) -> list[Document]:
+        return self._require_reranker().rerank(query, self._ensemble_for(category).invoke(query), self.k)
+
+    def retrieve_semantic_reranked(self, query: str, category: str | None = None) -> list[Document]:
+        candidates = self._parts_for(category)[1].invoke(query)
+        return self._require_reranker().rerank(query, candidates, self.k)
 
     def retrieve_semantic(self, query: str, category: str | None = None) -> list[Document]:
         return self._parts_for(category)[1].invoke(query)[: self.k]
@@ -56,6 +68,11 @@ class HybridRetriever:
         return self._parts_for(category)[0].invoke(query)[: self.k]
 
     # ---- internos ----
+    def _require_reranker(self) -> Reranker:
+        if self.reranker is None:
+            raise RuntimeError("No hay reranker configurado: pasá reranker= al construir el recuperador.")
+        return self.reranker
+
     def _parts_for(self, category: str | None):
         """(BM25 sobre el subcorpus, retriever vectorial con filtro de metadata). Cada uno trae 2k
         candidatos para que la fusión tenga de dónde elegir."""

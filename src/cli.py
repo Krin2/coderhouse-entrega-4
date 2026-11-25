@@ -6,6 +6,7 @@ import sys
 from dataclasses import replace
 from pathlib import Path
 
+from src.retrieval.rerank import DEFAULT_MODEL as DEFAULT_RERANK_MODEL
 from src.settings import Settings
 
 
@@ -20,9 +21,21 @@ def _ingest(settings: Settings, args) -> None:
     IngestPipeline.from_settings(settings, with_code=args.with_code).run()
 
 
+def _make_reranker(settings: Settings, args):
+    """PineconeReranker con caché en disco, o None si no se pidió `--rerank`."""
+    if not args.rerank:
+        return None
+    from src.infra.index import get_client
+    from src.retrieval.rerank import PineconeReranker
+    settings.require_keys()
+    return PineconeReranker(get_client(settings), args.rerank_model, max_requests=args.max_rerank_requests,
+                            cache_path=settings.cache_dir / f"rerank-{args.rerank_model}.jsonl")
+
+
 def _query(settings: Settings, args) -> None:
     from src.rag_system import RAGSystem
-    for d in RAGSystem(settings, k=args.k).retrieve(args.text, category=args.category):
+    rag = RAGSystem(settings, k=args.k, reranker=_make_reranker(settings, args))
+    for d in rag.retrieve(args.text, category=args.category, rerank=args.rerank):
         page = f" p.{int(d.metadata['page'])}" if "page" in d.metadata else ""
         print(f"{d.metadata['chunk_id']:<48}{page:<7}| {d.page_content[:60]!r}")
 
@@ -32,7 +45,9 @@ def _evaluate(settings: Settings, args) -> None:
     from src.evaluation.runner import load_golden, run_comparison
     from src.rag_system import RAGSystem
     golden = load_golden(settings.golden_set)
-    rag = RAGSystem(settings, k=args.k, cache_queries=True)
+    if args.rerank and args.report_dir is None:                  # no pisar el reporte sin reranking
+        settings = replace(settings, report_dir=Path("reports/rerank"))
+    rag = RAGSystem(settings, k=args.k, cache_queries=True, reranker=_make_reranker(settings, args))
     results = run_comparison(rag, golden, args.k, n_bootstrap=args.bootstrap, seed=args.seed)
     print(to_markdown(results))
     if not args.no_report:
@@ -56,6 +71,13 @@ def build_parser() -> argparse.ArgumentParser:
     common = argparse.ArgumentParser(add_help=False)
     common.add_argument("--namespace", default=None, help="namespace de Pinecone (por defecto, el de .env)")
 
+    rerank = argparse.ArgumentParser(add_help=False)
+    rerank.add_argument("--rerank", action="store_true",
+                        help="reordena los candidatos con el reranker de Pinecone (consume cuota de la API)")
+    rerank.add_argument("--rerank-model", default=DEFAULT_RERANK_MODEL)
+    rerank.add_argument("--max-rerank-requests", type=int, default=150,
+                        help="tope de solicitudes reales al reranker; la caché local no cuenta")
+
     parser = argparse.ArgumentParser(prog="python -m src.cli", description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("setup", parents=[common], help="crea el índice Serverless si no existe").set_defaults(run=_setup)
@@ -66,13 +88,13 @@ def build_parser() -> argparse.ArgumentParser:
     i.add_argument("--raw-dir", default=None, help="carpeta con .md/.pdf/.json/.jsonl (por defecto, data/raw)")
     i.set_defaults(run=_ingest)
 
-    q = sub.add_parser("query", parents=[common], help="consulta el recuperador híbrido")
+    q = sub.add_parser("query", parents=[common, rerank], help="consulta el recuperador híbrido")
     q.add_argument("text")
     q.add_argument("--category", default=None, help="restringe BM25 y Pinecone a una categoría")
     q.add_argument("-k", type=int, default=Settings.top_k)
     q.set_defaults(run=_query)
 
-    e = sub.add_parser("evaluate", parents=[common], help="métricas, IC y comparaciones sobre el golden set")
+    e = sub.add_parser("evaluate", parents=[common, rerank], help="métricas, IC y comparaciones sobre el golden set")
     e.add_argument("-k", type=int, default=Settings.top_k)
     e.add_argument("--bootstrap", type=int, default=2000, help="remuestreos para los intervalos de confianza")
     e.add_argument("--seed", type=int, default=0)

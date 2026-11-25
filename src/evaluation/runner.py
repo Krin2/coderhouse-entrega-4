@@ -23,6 +23,8 @@ VALID_SPLITS = {"dev", "test"}
 BM25, VECTOR, HYBRID = "Solo BM25", "Solo vectorial", "Híbrido 0.5/0.5"
 HYBRID_ORACLE = "Híbrido 0.5/0.5 + filtro categoría*"
 VECTOR_ORACLE = "Solo vectorial + filtro categoría*"
+HYBRID_RERANK = "Híbrido 0.5/0.5 + rerank"
+VECTOR_RERANK = "Solo vectorial + rerank"
 
 
 # ---------- golden set ----------
@@ -126,6 +128,10 @@ def run_comparison(rag, golden: list[dict], k: int, *, n_bootstrap: int = 2000, 
         rag.set_weights(weights)
         methods[tuned] = evaluate(rag.retrieve, k, golden, n_rel)
         rag.set_weights((0.5, 0.5))
+    reranker = getattr(rag, "reranker", None)
+    if reranker is not None:          # mismos candidatos que HYBRID / VECTOR, reordenados por el reranker
+        methods[HYBRID_RERANK] = evaluate(rag.retrieve_reranked, k, golden, n_rel)
+        methods[VECTOR_RERANK] = evaluate(rag.retrieve_semantic_reranked, k, golden, n_rel)
     methods[HYBRID_ORACLE] = evaluate(rag.retrieve, k, golden, n_rel, with_category=True)
     methods[VECTOR_ORACLE] = evaluate(rag.retrieve_semantic, k, golden, n_rel, with_category=True)
 
@@ -134,6 +140,7 @@ def run_comparison(rag, golden: list[dict], k: int, *, n_bootstrap: int = 2000, 
         "n_questions": {name: len(subset(methods[BM25], name)) for name in ("all", "dev", "test")},
         "weights_search": search, "tuned_weights": list(weights), "tuned_name": tuned,
         "methods": methods,
+        "rerank": reranker.stats() if hasattr(reranker, "stats") else None,
     }
     results["analysis"] = analyze(results)
     return results
@@ -159,12 +166,16 @@ def analyze(results: dict) -> dict:
     pairs = [("test", HYBRID, VECTOR), ("test", HYBRID, BM25), ("all", HYBRID, VECTOR), ("all", HYBRID, BM25)]
     if tuned != HYBRID:
         pairs += [("test", tuned, VECTOR), ("test", tuned, HYBRID)]
+    if HYBRID_RERANK in methods:
+        for part in ("test", "all"):
+            pairs += [(part, HYBRID_RERANK, HYBRID), (part, HYBRID_RERANK, VECTOR),
+                      (part, VECTOR_RERANK, VECTOR), (part, HYBRID_RERANK, VECTOR_RERANK)]
     comparisons = []
     for part, a, b in pairs:
         ra, rb = subset(methods[a], part), subset(methods[b], part)
         if not ra:
             continue
-        for metric in ("recall", "mrr"):
+        for metric in ("recall", "mrr", "ndcg"):
             comparisons.append({
                 "subset": part, "a": a, "b": b, "metric": metric,
                 **paired_bootstrap([r[metric] for r in ra], [r[metric] for r in rb], n_resamples=n_boot, seed=seed),
@@ -173,7 +184,9 @@ def analyze(results: dict) -> dict:
     by_type: dict = {}
     for tipo in sorted({r["tipo"] for r in methods[HYBRID]}):
         by_type[tipo] = {}
-        for name in (BM25, VECTOR, HYBRID):
+        for name in (BM25, VECTOR, HYBRID, HYBRID_RERANK, VECTOR_RERANK):
+            if name not in methods:
+                continue
             rows = [r for r in methods[name] if r["tipo"] == tipo]
             by_type[tipo][name] = {"n": len(rows), **mean_metrics(rows)}
     return {"summary": summary, "comparisons": comparisons, "by_type": by_type}
