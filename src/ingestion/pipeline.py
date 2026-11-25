@@ -38,7 +38,8 @@ class IngestPipeline:
         if not docs:
             raise RuntimeError(f"No hay documentos en {self.settings.raw_dir}. Ver README (descarga del dataset).")
         chunks = split_documents(
-            docs, chunk_size=self.settings.chunk_size, chunk_overlap=self.settings.chunk_overlap)
+            docs, chunk_size=self.settings.chunk_size, chunk_overlap=self.settings.chunk_overlap,
+            min_tokens=self.settings.min_chunk_tokens, max_tokens=self.settings.max_chunk_tokens)
         print(f"{len(docs)} documentos -> {len(chunks)} chunks")
         self.reset_namespace()
         # ids determinísticos -> reingestar es idempotente

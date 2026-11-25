@@ -6,7 +6,7 @@ Módulo de recuperación híbrido (BM25 + vectorial) sobre Pinecone Serverless, 
 
 - **Embeddings:** OpenAI `text-embedding-3-small` (1536 dim, cosine).
 - **Índice:** Pinecone Serverless (AWS `us-east-1`), namespace `docs-fastapi`.
-- **Chunking:** `RecursiveCharacterTextSplitter` por tokens (600 tokens, overlap 80).
+- **Chunking:** `RecursiveCharacterTextSplitter` por tokens (600 tokens, overlap 80); los chunks de menos de 200 tokens se fusionan con su vecino hasta un máximo de 800.
 - **Metadata por chunk:** `text` (contenido original), `source`, `category`, `doc_id`, `chunk_id`, `chunk_index` (posición en el documento) y `section` (encabezado Markdown del chunk).
 - **Híbrido:** `EnsembleRetriever` (BM25 0.5 + Pinecone 0.5). El corpus BM25 se reconstruye desde la metadata de Pinecone (caché en `data/cache/`, que se invalida sola: `ingest` la borra y, además, se descarta si su tamaño no coincide con el namespace de Pinecone), sin otra base de datos.
 
@@ -68,7 +68,7 @@ New-Item -ItemType Directory -Force data\code | Out-Null
 Copy-Item "$env:TEMP\fastapi_src\docs_src\*" data\code -Recurse
 
 python -m src.cli setup            # crea el índice (idempotente)
-python -m src.cli ingest           # 75 documentos -> 271 chunks
+python -m src.cli ingest           # 75 documentos -> 224 chunks
 python -m src.cli query "lifespan events" --category advanced   # prueba rápida
 python evaluate.py                 # reporte de métricas (= python -m src.cli evaluate)
 ```
@@ -99,20 +99,35 @@ python -m src.cli evaluate --namespace otro-ns --report-dir reports/otro   # otr
 
 | Método | Recall@5 | MRR | nDCG@5 | Precision@5 | Precision@5 norm. |
 |---|---|---|---|---|---|
-| Solo BM25 | 0.88 [0.75, 1.00] | 0.71 [0.55, 0.86] | 0.49 [0.37, 0.62] | 0.30 | 0.49 |
-| Solo vectorial | 0.96 [0.88, 1.00] | **0.84** [0.72, 0.95] | **0.70** [0.59, 0.80] | **0.47** | **0.73** |
-| Híbrido 0.5/0.5 | **1.00** [1.00, 1.00] | 0.83 [0.70, 0.95] | 0.66 [0.54, 0.77] | 0.42 | 0.67 |
+| Solo BM25 | 0.83 [0.67, 0.96] | 0.69 [0.52, 0.83] | 0.52 [0.39, 0.64] | 0.30 | 0.55 |
+| Solo vectorial | **1.00** [1.00, 1.00] | **0.88** [0.77, 0.97] | **0.73** [0.64, 0.83] | **0.43** | **0.76** |
+| Híbrido 0.5/0.5 | **1.00** [1.00, 1.00] | 0.83 [0.70, 0.95] | 0.68 [0.56, 0.79] | 0.39 | 0.72 |
 
-En todo el set (n=48): Recall@5 0.92 (BM25), 0.98 (vectorial), 1.00 (híbrido); MRR 0.79, 0.90 y 0.89. Reporte completo, con pesos, desglose por tipo y preguntas falladas, en [reports/baseline/latest.md](reports/baseline/latest.md).
+En todo el set (n=48): Recall@5 0.90 (BM25), 1.00 (vectorial) y 1.00 (híbrido); MRR 0.77, 0.93 y 0.90. Reporte completo, con barrido de pesos, desglose por tipo y comparaciones, en [reports/latest.md](reports/latest.md).
 
 ### Qué se puede y qué no se puede afirmar
 
-- **El híbrido supera claramente a BM25 solo** (MRR +0.105 en las 48 preguntas, IC [+0.030, +0.189], p=0.002).
-- **El híbrido no supera al vectorial solo.** Recall +0.02 (IC [0.00, +0.06], p=0.35) y MRR −0.003 (IC [−0.075, +0.069], p=0.53): son indistinguibles. Su ventaja es que no falla en ninguna pregunta (Recall 1.00 frente a 0.98), sobre todo en las parafraseadas.
-- **El barrido de pesos en `dev` es plano**: MRR entre 0.94 y 0.96 para pesos de BM25 de 0.1 a 0.6, y baja a 0.90-0.92 con 0.7-0.9. Gana 0.5/0.5 por desempate, así que no hay un ajuste mejor que el valor por defecto.
-- **BM25 no destaca en las preguntas `exacto`** (MRR 0.87 frente a 0.95 del vectorial). Hipótesis: los bloques de código de la documentación (`{* ... *}`) no entran al índice. Se probó y **no es la causa** (ver abajo).
-- **El filtro por categoría** mejora MRR (+0.02 en todo el set, hasta +0.05 en 	est) con una categoría conocida de antemano (oráculo, cota superior): es útil solo si la aplicación conoce la categoría.
-- Con n=24 en `test`, un intervalo de ±0.1 es esperable; las diferencias menores a eso no son concluyentes.
+- **El híbrido supera claramente a BM25 solo** (en las 48 preguntas: Recall +0.10, IC [+0.02, +0.19], p=0.008; MRR +0.13, IC [+0.06, +0.21], p<0.001).
+- **El híbrido no supera al vectorial solo.** Ambos aciertan en las 48 preguntas (Recall 1.00) y el MRR del híbrido es incluso algo menor (−0.023, IC [−0.085, +0.041], p=0.76): indistinguibles. Con este corpus, BM25 no aporta una mejora medible sobre la búsqueda vectorial; el híbrido solo gana en las preguntas parafraseadas (MRR 0.92 frente a 0.88) y pierde en las ambiguas (0.87 frente a 0.95).
+- **El barrido de pesos en `dev` es plano hasta 0.5** (MRR 0.979 con pesos de BM25 de 0.1 a 0.5) y baja a 0.90-0.96 con 0.6-0.9. Se eligió 0.5/0.5 por tener el mejor nDCG entre los empatados.
+- **BM25 no destaca en las preguntas `exacto`** (MRR 0.86 frente a 0.95 del vectorial). Indexar el código de los ejemplos no lo explica (ver abajo).
+- **El filtro por categoría**, con la categoría conocida de antemano (oráculo, cota superior), sube el MRR del híbrido de 0.90 a 0.93. Solo es útil si la aplicación conoce la categoría. No se hizo prueba pareada.
+- Con n=24 en `test`, un intervalo de ±0.1 es esperable: las diferencias menores no son concluyentes.
+
+### Experimento: tamaño de los chunks
+
+El splitter es voraz y deja chunks diminutos cuando la sección vecina ya está casi llena (590 + 33 > 600): con `chunk_size=600`, 51 de 271 chunks (19 %) tenían menos de 200 tokens y el mínimo era 6. Ahora los chunks de menos de `min_chunk_tokens=200` se fusionan con su vecino, sin pasar de `max_chunk_tokens=800`. La fusión recompone el tramo del texto original, así que el solapamiento no se duplica, y `page` y `section` siguen siendo los del inicio del chunk.
+
+| | Antes | Ahora |
+|---|---|---|
+| Chunks | 271 | 224 |
+| Menos de 200 tokens | 51 | 4 |
+| Mediana / p75 / máximo (tokens) | 406 / 518 / 596 | 453 / 552 / 770 |
+| Entre 500 y 800 tokens | 80 (30 %) | 85 (38 %) |
+
+Los dos chunks que quedan bajo 150 tokens son documentos enteros de un solo chunk corto. Impacto medido con las mismas 48 preguntas y bootstrap pareado ([reports/ablation-chunks.md](reports/ablation-chunks.md); versión anterior en [reports/baseline/](reports/baseline/latest.md)): el híbrido no cambia (Recall 1.00 → 1.00, MRR +0.009, p=0.39), el vectorial solo mejora algo (Recall 0.98 → 1.00, MRR +0.030, p=0.04, una de ~30 comparaciones, así que sin mucho peso) y BM25 solo empeora levemente (Recall −0.02). No hay regresión del método por defecto. Solo ~38 % de los chunks cae en el rango 500-800 de la consigna: la mediana es menor porque muchas secciones de la documentación son cortas, y fusionarlas más (mínimo 300) subiría los chunks por encima de lo que conviene a la precisión.
+
+Al implementarlo apareció un defecto de LangChain: `add_start_index` devuelve -1 para el 9 % de los chunks (24 de 271, en 18 de 75 documentos), porque busca desde «inicio anterior + largo anterior − chunk_overlap» tratando el solapamiento (en tokens) como caracteres. Por eso las posiciones se calculan en `locate_chunks`. Esto también corrige un efecto latente sobre `page` en los PDF.
 ### Experimento: indexar el código de los ejemplos
 
 La documentación referencia ~350 fragmentos de código (`{* ../../docs_src/... *}`). Por defecto se descartan; con `ingest --with-code` se incrustan como bloques de código (respetando `ln[a:b]` y sin repetir el mismo fragmento en un documento): 271 → 363 chunks. Se midió en un namespace aparte del mismo índice (`docs-fastapi-code`), con las mismas 48 preguntas y semillas, y bootstrap pareado ([reports/ablation-code.md](reports/ablation-code.md)):
@@ -123,7 +138,8 @@ La documentación referencia ~350 fragmentos de código (`{* ../../docs_src/... 
 | Vectorial | 0.98 → 0.96 | 0.90 → 0.92 (p=0.19) | 0.80 → 0.79 |
 | Híbrido 0.5/0.5 | 1.00 → 0.98 | 0.89 → 0.90 (p=0.34) | 0.77 → 0.75 |
 
-**Conclusión: resultado nulo.** Ninguna diferencia es creíble (todos los IC incluyen o tocan el 0) y el híbrido pierde una pregunta (`cookie-params`: la palabra `Cookie` aparece ahora en el código de otros documentos y compite con el correcto). Precision@5 sube (0.44 → 0.50) solo porque hay más chunks por documento: la normalizada baja (0.79 → 0.74). Por eso el código **no se indexa por defecto**; queda como opción documentada.
+**Conclusión: resultado nulo.** Ninguna diferencia es creíble (todos los IC incluyen o tocan el 0) y el híbrido pierde una pregunta (`cookie-params`: la palabra `Cookie` aparece ahora en el código de otros documentos y compite con el correcto). Precision@5 sube (0.44 → 0.50) solo porque hay más chunks por documento: la normalizada baja (0.79 → 0.74). Por eso el código **no se indexa por defecto**; queda como opción documentada (medido con la versión anterior del chunking).
+
 ## Filtro por categoría
 
 ```python
@@ -135,7 +151,7 @@ El filtro se aplica a ambos recuperadores: BM25 se construye sobre el subcorpus 
 ## Tests
 
 ```powershell
-pytest                    # 109 tests unitarios, sin red (corpus y vectorstore falsos)
+pytest                    # 121 tests unitarios, sin red (corpus y vectorstore falsos)
 pytest -m integration   # prueba contra Pinecone/OpenAI reales (requiere .env)
 ```
 
