@@ -1,78 +1,290 @@
 [
     {
         "pregunta":  "How do I run a function in the background after returning a response using BackgroundTasks?",
-        "documento_id_esperado":  "tutorial/background-tasks"
+        "documento_id_esperado":  "tutorial/background-tasks",
+        "tipo":  "exacto",
+        "split":  "dev"
     },
     {
         "pregunta":  "How do I enable CORSMiddleware and configure allow_origins?",
-        "documento_id_esperado":  "tutorial/cors"
+        "documento_id_esperado":  "tutorial/cors",
+        "tipo":  "exacto",
+        "split":  "test"
     },
     {
         "pregunta":  "How do I receive an uploaded file with UploadFile?",
-        "documento_id_esperado":  "tutorial/request-files"
+        "documento_id_esperado":  "tutorial/request-files",
+        "tipo":  "exacto",
+        "split":  "dev"
     },
     {
         "pregunta":  "How do I return an HTTP error to the client by raising HTTPException with a status code?",
-        "documento_id_esperado":  "tutorial/handling-errors"
+        "documento_id_esperado":  "tutorial/handling-errors",
+        "tipo":  "exacto",
+        "split":  "test"
     },
     {
         "pregunta":  "How can I serve static files such as images or CSS from a directory with StaticFiles?",
-        "documento_id_esperado":  "tutorial/static-files"
+        "documento_id_esperado":  "tutorial/static-files",
+        "tipo":  "exacto",
+        "split":  "dev"
     },
     {
         "pregunta":  "What exception do I catch to detect that a WebSocketDisconnect happened?",
-        "documento_id_esperado":  "advanced/websockets"
+        "documento_id_esperado":  "advanced/websockets",
+        "tipo":  "exacto",
+        "split":  "test"
     },
     {
         "pregunta":  "How do I add code that runs before and after each request with @app.middleware?",
-        "documento_id_esperado":  "tutorial/middleware"
+        "documento_id_esperado":  "tutorial/middleware",
+        "tipo":  "exacto",
+        "split":  "dev"
     },
     {
         "pregunta":  "How do I declare an HttpUrl field inside a nested Pydantic model?",
-        "documento_id_esperado":  "tutorial/body-nested-models"
+        "documento_id_esperado":  "tutorial/body-nested-models",
+        "tipo":  "exacto",
+        "split":  "test"
     },
     {
         "pregunta":  "How do I receive HTML form fields with Form instead of JSON?",
-        "documento_id_esperado":  "tutorial/request-forms"
+        "documento_id_esperado":  "tutorial/request-forms",
+        "tipo":  "exacto",
+        "split":  "dev"
     },
     {
         "pregunta":  "How do I use ORJSONResponse to return faster JSON responses?",
-        "documento_id_esperado":  "advanced/custom-response"
+        "documento_id_esperado":  "advanced/custom-response",
+        "tipo":  "exacto",
+        "split":  "test"
     },
     {
         "pregunta":  "How do I write tests for my app using TestClient?",
-        "documento_id_esperado":  "tutorial/testing"
+        "documento_id_esperado":  "tutorial/testing",
+        "tipo":  "exacto",
+        "split":  "dev"
     },
     {
         "pregunta":  "How do I restrict a path parameter to predefined values using an Enum?",
-        "documento_id_esperado":  "tutorial/path-params"
+        "documento_id_esperado":  "tutorial/path-params",
+        "tipo":  "exacto",
+        "split":  "test"
     },
     {
         "pregunta":  "Why does convert_underscores matter when reading a header parameter?",
-        "documento_id_esperado":  "tutorial/header-params"
+        "documento_id_esperado":  "tutorial/header-params",
+        "tipo":  "exacto",
+        "split":  "dev"
     },
     {
         "pregunta":  "How do I read a Cookie parameter in a path operation?",
-        "documento_id_esperado":  "tutorial/cookie-params"
+        "documento_id_esperado":  "tutorial/cookie-params",
+        "tipo":  "exacto",
+        "split":  "test"
     },
     {
         "pregunta":  "How do I run startup and shutdown logic with the lifespan parameter?",
-        "documento_id_esperado":  "advanced/events"
+        "documento_id_esperado":  "advanced/events",
+        "tipo":  "exacto",
+        "split":  "dev"
     },
     {
         "pregunta":  "How do I define SQLModel tables and connect to a SQL database?",
-        "documento_id_esperado":  "tutorial/sql-databases"
+        "documento_id_esperado":  "tutorial/sql-databases",
+        "tipo":  "exacto",
+        "split":  "test"
     },
     {
         "pregunta":  "How do I render HTML pages using Jinja2Templates?",
-        "documento_id_esperado":  "advanced/templates"
+        "documento_id_esperado":  "advanced/templates",
+        "tipo":  "exacto",
+        "split":  "dev"
     },
     {
         "pregunta":  "How can I make sure a numeric URL parameter is greater than zero?",
-        "documento_id_esperado":  "tutorial/path-params-numeric-validations"
+        "documento_id_esperado":  "tutorial/path-params-numeric-validations",
+        "tipo":  "parafrasis",
+        "split":  "dev"
     },
     {
         "pregunta":  "How do I let a frontend served from another domain call my API in the browser?",
-        "documento_id_esperado":  "tutorial/cors"
+        "documento_id_esperado":  "tutorial/cors",
+        "tipo":  "parafrasis",
+        "split":  "test"
+    },
+    {
+        "pregunta":  "How do I use StreamingResponse with yield to send data to the client in chunks?",
+        "documento_id_esperado":  "advanced/stream-data",
+        "tipo":  "exacto",
+        "split":  "test"
+    },
+    {
+        "pregunta":  "How do I mount a Flask application inside FastAPI using WSGIMiddleware?",
+        "documento_id_esperado":  "advanced/wsgi",
+        "tipo":  "exacto",
+        "split":  "dev"
+    },
+    {
+        "pregunta":  "How do I declare a Query parameter with max_length using Annotated?",
+        "documento_id_esperado":  "tutorial/query-params-str-validations",
+        "tipo":  "exacto",
+        "split":  "test"
+    },
+    {
+        "pregunta":  "How do I use jsonable_encoder to convert a Pydantic model into JSON compatible data?",
+        "documento_id_esperado":  "tutorial/encoder",
+        "tipo":  "exacto",
+        "split":  "dev"
+    },
+    {
+        "pregunta":  "How do I enable TrustedHostMiddleware and HTTPSRedirectMiddleware?",
+        "documento_id_esperado":  "advanced/middleware",
+        "tipo":  "exacto",
+        "split":  "test"
+    },
+    {
+        "pregunta":  "How can I make my app read its configuration from environment variables?",
+        "documento_id_esperado":  "advanced/settings",
+        "tipo":  "parafrasis",
+        "split":  "dev"
+    },
+    {
+        "pregunta":  "How can an endpoint change the HTTP status code of its response at runtime?",
+        "documento_id_esperado":  "advanced/response-change-status-code",
+        "tipo":  "parafrasis",
+        "split":  "test"
+    },
+    {
+        "pregunta":  "How do I set a cookie on the response that goes back to the client?",
+        "documento_id_esperado":  "advanced/response-cookies",
+        "tipo":  "parafrasis",
+        "split":  "dev"
+    },
+    {
+        "pregunta":  "How can I add custom headers to the response of my endpoint?",
+        "documento_id_esperado":  "advanced/response-headers",
+        "tipo":  "parafrasis",
+        "split":  "test"
+    },
+    {
+        "pregunta":  "How can the server push events to the browser over a single long-lived HTTP connection?",
+        "documento_id_esperado":  "tutorial/server-sent-events",
+        "tipo":  "parafrasis",
+        "split":  "dev"
+    },
+    {
+        "pregunta":  "How do I swap a dependency for a fake one while running my test suite?",
+        "documento_id_esperado":  "advanced/testing-dependencies",
+        "tipo":  "parafrasis",
+        "split":  "test"
+    },
+    {
+        "pregunta":  "How do I limit the maximum size of the request body my API accepts?",
+        "documento_id_esperado":  "advanced/request-body-limits",
+        "tipo":  "parafrasis",
+        "split":  "dev"
+    },
+    {
+        "pregunta":  "How can I organize a large application into several files and routers?",
+        "documento_id_esperado":  "tutorial/bigger-applications",
+        "tipo":  "parafrasis",
+        "split":  "test"
+    },
+    {
+        "pregunta":  "How do I update only some fields of a stored item instead of replacing all of it?",
+        "documento_id_esperado":  "tutorial/body-updates",
+        "tipo":  "parafrasis",
+        "split":  "dev"
+    },
+    {
+        "pregunta":  "How do I give my generated API documentation a title, description and version?",
+        "documento_id_esperado":  "tutorial/metadata",
+        "tipo":  "parafrasis",
+        "split":  "test"
+    },
+    {
+        "pregunta":  "How do I make my app work correctly behind a reverse proxy that strips a path prefix?",
+        "documento_id_esperado":  "advanced/behind-a-proxy",
+        "tipo":  "parafrasis",
+        "split":  "dev"
+    },
+    {
+        "pregunta":  "How can I return a raw response without FastAPI validating or serializing it?",
+        "documento_id_esperado":  "advanced/response-directly",
+        "tipo":  "parafrasis",
+        "split":  "test"
+    },
+    {
+        "pregunta":  "How can I generate a client library for my API in TypeScript?",
+        "documento_id_esperado":  "advanced/generate-clients",
+        "tipo":  "parafrasis",
+        "split":  "dev"
+    },
+    {
+        "pregunta":  "How do I document requests that my API will send to other services when something happens?",
+        "documento_id_esperado":  "advanced/openapi-webhooks",
+        "tipo":  "parafrasis",
+        "split":  "test"
+    },
+    {
+        "pregunta":  "How do I control which fields are returned to the client so a password is never exposed?",
+        "documento_id_esperado":  "tutorial/response-model",
+        "tipo":  "ambigua",
+        "split":  "dev"
+    },
+    {
+        "pregunta":  "What is the difference between async def and plain def for my endpoints and when should I use each?",
+        "documento_id_esperado":  "async",
+        "tipo":  "ambigua",
+        "split":  "test"
+    },
+    {
+        "pregunta":  "How can I run my application inside a debugger from my editor?",
+        "documento_id_esperado":  "tutorial/debugging",
+        "tipo":  "ambigua",
+        "split":  "dev"
+    },
+    {
+        "pregunta":  "How do I receive a single plain value in the body next to a model?",
+        "documento_id_esperado":  "tutorial/body-multiple-params",
+        "tipo":  "ambigua",
+        "split":  "test"
+    },
+    {
+        "pregunta":  "How do I make the API reject unexpected extra query parameters?",
+        "documento_id_esperado":  "tutorial/query-param-models",
+        "tipo":  "ambigua",
+        "split":  "dev"
+    },
+    {
+        "pregunta":  "How do I make the API reject unexpected extra cookies?",
+        "documento_id_esperado":  "tutorial/cookie-param-models",
+        "tipo":  "ambigua",
+        "split":  "test"
+    },
+    {
+        "pregunta":  "How can I stop underscores in header names from being converted to hyphens when using a model?",
+        "documento_id_esperado":  "tutorial/header-param-models",
+        "tipo":  "ambigua",
+        "split":  "dev"
+    },
+    {
+        "pregunta":  "How do I show an example payload in the interactive documentation?",
+        "documento_id_esperado":  "tutorial/schema-extra-example",
+        "tipo":  "ambigua",
+        "split":  "test"
+    },
+    {
+        "pregunta":  "How do I receive an uploaded file and a regular form field in the same request?",
+        "documento_id_esperado":  "tutorial/request-forms-and-files",
+        "tipo":  "ambigua",
+        "split":  "dev"
+    },
+    {
+        "pregunta":  "How do I list other possible responses such as 404 in the OpenAPI docs of an endpoint?",
+        "documento_id_esperado":  "advanced/additional-responses",
+        "tipo":  "ambigua",
+        "split":  "test"
     }
 ]

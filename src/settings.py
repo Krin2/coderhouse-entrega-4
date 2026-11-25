@@ -34,6 +34,7 @@ class Settings:
     raw_dir: Path = Path("data/raw")
     corpus_cache: Path = Path("data/cache/corpus.jsonl")
     golden_set: Path = Path("eval/golden_set.json")
+    report_dir: Path = Path("reports")
 
     @classmethod
     def from_env(cls, **overrides) -> "Settings":

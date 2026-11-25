@@ -25,10 +25,16 @@ def _query(settings: Settings, args) -> None:
 
 
 def _evaluate(settings: Settings, args) -> None:
-    from src.evaluation.runner import compare, format_report, load_golden
+    from src.evaluation.report import to_markdown, write_reports
+    from src.evaluation.runner import load_golden, run_comparison
     from src.rag_system import RAGSystem
     golden = load_golden(settings.golden_set)
-    print(format_report(compare(RAGSystem(settings, k=args.k), golden, args.k), args.k, len(golden)))
+    rag = RAGSystem(settings, k=args.k, cache_queries=True)
+    results = run_comparison(rag, golden, args.k, n_bootstrap=args.bootstrap, seed=args.seed)
+    print(to_markdown(results))
+    if not args.no_report:
+        md, js = write_reports(results, settings.report_dir)
+        print(f"Reporte guardado en {md} y {js}")
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -43,6 +49,9 @@ def build_parser() -> argparse.ArgumentParser:
     q.set_defaults(run=_query)
     e = sub.add_parser("evaluate", help="Recall@k y Precision@k sobre el golden set")
     e.add_argument("-k", type=int, default=Settings.top_k)
+    e.add_argument("--bootstrap", type=int, default=2000, help="remuestreos para los intervalos de confianza")
+    e.add_argument("--seed", type=int, default=0)
+    e.add_argument("--no-report", action="store_true", help="no escribir reports/latest.{md,json}")
     e.set_defaults(run=_evaluate)
     return parser
 
