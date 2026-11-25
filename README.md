@@ -15,7 +15,7 @@ src/
 ├─ settings.py          Settings (dataclass inmutable; el entorno se lee con Settings.from_env())
 ├─ infra/index.py       cliente Pinecone y creación idempotente del índice Serverless
 ├─ ingestion/
-│  ├─ loaders.py        MarkdownLoader (protocolo Loader: añadir PDF/JSON = una clase)
+│  ├─ loaders.py        MarkdownLoader · PdfLoader · JsonLoader · CompositeLoader (protocolo Loader)
 │  ├─ chunking.py       chunks por tokens + metadata (chunk_id, chunk_index, section)
 │  └─ pipeline.py       IngestPipeline: loader -> chunking -> reset namespace -> Pinecone
 ├─ retrieval/
@@ -30,6 +30,24 @@ evaluate.py             punto de entrada de la consigna (= `python -m src.cli ev
 tests/                  pytest: unitarios sin red + 1 de integración
 ```
 
+## Formatos de entrada
+
+`ingest` recorre `data/raw` (o `--raw-dir`) y elige el loader por extensión. Un mismo corpus puede mezclar formatos.
+
+| Formato | Unidad | Metadata propia |
+|---|---|---|
+| `.md` | un documento por archivo | `section` (encabezado del chunk), `category` = carpeta |
+| `.pdf` | un documento **por página** | `page` real (1-based), `total_pages`, `title` si el PDF la trae |
+| `.json` / `.jsonl` | un documento por registro | `category`, `tags` y cualquier campo escalar o lista de str del registro |
+
+```json
+[{"id": "pwd", "text": "Para restablecer tu clave...", "category": "cuentas", "tags": ["login", "clave"]}]
+```
+
+- `doc_id` es la ruta sin extensión (`runbooks/operaciones`); en JSON, `<archivo>/<id>`. Si dos archivos producen el mismo `doc_id` (p. ej. `guia.md` y `guia.pdf`) la ingesta falla con un error explícito.
+- Los chunks **no cruzan páginas**, para que `page` sea exacto. Las páginas sin texto (PDF escaneados, sin OCR) se omiten y quedan en `PdfLoader.skipped_pages`; un PDF cifrado con contraseña falla.
+- Los registros JSON inválidos (sin texto, ids repetidos, estructura que no es lista de objetos) fallan indicando `archivo[posición]`. Los campos anidados no se indexan (Pinecone solo admite escalares y listas de texto), y `source`, `doc_id`, `chunk_id`, `chunk_index` y `text` no se pueden sobrescribir.
+- Verificado contra Pinecone real con un PDF de 3 páginas y un JSON con etiquetas: la consulta *"how do I fail over the database"* devuelve la página 2 del PDF en primer lugar, y `--category cuentas` filtra por el campo del JSON. Los tests de los loaders generan los PDF al vuelo, sin archivos binarios en el repo.
 ## Replicar el índice (PowerShell)
 
 ```powershell
@@ -117,7 +135,7 @@ El filtro se aplica a ambos recuperadores: BM25 se construye sobre el subcorpus 
 ## Tests
 
 ```powershell
-pytest                    # 82 tests unitarios, sin red (corpus y vectorstore falsos)
+pytest                    # 101 tests unitarios, sin red (corpus y vectorstore falsos)
 pytest -m integration   # prueba contra Pinecone/OpenAI reales (requiere .env)
 ```
 

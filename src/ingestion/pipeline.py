@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from src.infra.index import ensure_index, get_index
 from src.ingestion.chunking import split_documents
-from src.ingestion.loaders import Loader, MarkdownLoader
+from src.ingestion.loaders import Loader, default_loader
 from src.settings import Settings
 from src.vectorstore import get_vectorstore
 
@@ -21,7 +21,7 @@ class IngestPipeline:
             raise FileNotFoundError(f"No existe {settings.code_dir}. Copiá docs_src de FastAPI ahí (ver README).")
         settings.require_keys()
         ensure_index(settings)
-        loader = MarkdownLoader(settings.raw_dir, settings.code_dir if with_code else None)
+        loader = default_loader(settings.raw_dir, settings.code_dir if with_code else None)
         return cls(settings, loader, get_vectorstore(settings), get_index(settings))
 
     def reset_namespace(self) -> None:
