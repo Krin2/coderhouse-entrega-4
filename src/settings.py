@@ -32,9 +32,15 @@ class Settings:
 
     # Rutas
     raw_dir: Path = Path("data/raw")
-    corpus_cache: Path = Path("data/cache/corpus.jsonl")
+    code_dir: Path = Path("data/code")            # docs_src de FastAPI (opcional, ver `ingest --with-code`)
+    cache_dir: Path = Path("data/cache")
     golden_set: Path = Path("eval/golden_set.json")
     report_dir: Path = Path("reports")
+
+    @property
+    def corpus_cache(self) -> Path:
+        """Caché BM25 propia de cada namespace (evita mezclar corpus de distintos índices)."""
+        return self.cache_dir / f"{self.namespace}.jsonl"
 
     @classmethod
     def from_env(cls, **overrides) -> "Settings":
