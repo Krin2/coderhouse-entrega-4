@@ -1,6 +1,32 @@
-﻿.env
+﻿# Secretos / entorno
+.env
+.env.*
+!.env.example
+
+# Entornos virtuales
 .venv/
+venv/
+env/
+
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+
+# Datos generados / descargados (se replican con el README)
 data/raw/
 data/cache/
+
+# IDE / SO
+.vscode/
+.idea/
+.claude/
+.DS_Store
+Thumbs.db
+*.log
