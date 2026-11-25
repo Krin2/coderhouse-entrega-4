@@ -1,4 +1,4 @@
-﻿import pytest
+import pytest
 from langchain_core.documents import Document
 
 from src.evaluation import runner
@@ -128,7 +128,7 @@ def test_run_comparison_estructura_y_sin_fuga(rag):
     assert tuned not in res["analysis"]["summary"]["all"]          # el ajustado no se mide donde se ajustó
     assert res["analysis"]["summary"]["test"][tuned]["mrr"]["mean"] == 1.0
     assert res["analysis"]["summary"]["test"][runner.HYBRID]["mrr"]["mean"] == 0.5
-    assert {c["metric"] for c in res["analysis"]["comparisons"]} == {"recall", "mrr"}
+    assert {c["metric"] for c in res["analysis"]["comparisons"]} == {"recall", "mrr", "ndcg"}
     assert set(res["analysis"]["by_type"]) == {"exacto", "parafrasis", "ambigua"}
 
 
@@ -139,3 +139,27 @@ def test_reporte_markdown_y_archivos(rag, tmp_path):
         assert fragment in md
     md_path, json_path = write_reports(res, tmp_path / "reports")
     assert md_path.read_text(encoding="utf-8") == md and json_path.exists()
+
+class FakeReranker:
+    def stats(self): return {"model": "fake-rr", "requests": 7, "cache_hits": 3, "mean_latency_ms": 950}
+
+
+def test_comparacion_con_reranker_agrega_metodos_pares_y_estadisticas(rag):
+    rag.reranker = FakeReranker()
+    rag.retrieve_reranked = lambda q, category=None: rag._answer(q, True)           # siempre acierta primero
+    rag.retrieve_semantic_reranked = lambda q, category=None: rag._answer(q, True)
+    res = run_comparison(rag, GOLDEN, 5, n_bootstrap=100, seed=0)
+    assert {runner.HYBRID_RERANK, runner.VECTOR_RERANK} <= res["methods"].keys()
+    pairs = {(c["a"], c["b"]) for c in res["analysis"]["comparisons"]}
+    assert {(runner.HYBRID_RERANK, runner.HYBRID), (runner.HYBRID_RERANK, runner.VECTOR),
+            (runner.VECTOR_RERANK, runner.VECTOR), (runner.HYBRID_RERANK, runner.VECTOR_RERANK)} <= pairs
+    assert runner.HYBRID_RERANK in res["analysis"]["by_type"]["exacto"]
+    assert res["rerank"]["requests"] == 7
+    md = to_markdown(res)
+    assert "## Reranker" in md and "fake-rr" in md and "950 ms" in md
+
+
+def test_comparacion_sin_reranker_no_agrega_nada(rag):
+    res = run_comparison(rag, GOLDEN, 5, n_bootstrap=50, seed=0)
+    assert runner.HYBRID_RERANK not in res["methods"] and res["rerank"] is None
+    assert "## Reranker" not in to_markdown(res)

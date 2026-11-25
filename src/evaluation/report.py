@@ -4,7 +4,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from src.evaluation.runner import BM25, HYBRID, VECTOR
+from src.evaluation.runner import BM25, HYBRID, HYBRID_RERANK, VECTOR, VECTOR_RERANK
 
 
 def _ci(entry: dict) -> str:
@@ -50,11 +50,19 @@ def to_markdown(results: dict) -> str:
         lines.append(f"| {c['subset']} | {c['a']} | {c['b']} | {c['metric']} | {c['diff']:+.3f} | "
                      f"[{c['lo']:+.3f}, {c['hi']:+.3f}] | {c['p']:.3f} |")
 
+    shown = [m for m in (BM25, VECTOR, HYBRID, HYBRID_RERANK, VECTOR_RERANK)
+             if m in next(iter(a["by_type"].values()))]
     lines += ["\n## Por tipo de pregunta (todo el set)", "",
-              f"| Tipo | n | {BM25} (R / MRR) | {VECTOR} (R / MRR) | {HYBRID} (R / MRR) |", "|---|---|---|---|---|"]
+              "| Tipo | n | " + " | ".join(f"{m} (R / MRR)" for m in shown) + " |", "|---|---|" + "---|" * len(shown)]
     for tipo, per in a["by_type"].items():
-        cells = " | ".join(f"{per[m]['recall']:.2f} / {per[m]['mrr']:.2f}" for m in (BM25, VECTOR, HYBRID))
+        cells = " | ".join(f"{per[m]['recall']:.2f} / {per[m]['mrr']:.2f}" for m in shown)
         lines.append(f"| {tipo} | {per[HYBRID]['n']} | {cells} |")
+
+    if results.get("rerank"):
+        rr = results["rerank"]
+        lines += ["\n## Reranker", "",
+                  f"Modelo `{rr['model']}`: {rr['requests']} solicitudes a la API, {rr['cache_hits']} servidas desde "
+                  f"la caché local, latencia media {rr['mean_latency_ms']} ms por solicitud."]
 
     misses = [r for r in results["methods"][HYBRID] if r["recall"] == 0]
     lines += [f"\n## Preguntas que el híbrido 0.5/0.5 no resuelve en el top-{k} ({len(misses)})", ""]
